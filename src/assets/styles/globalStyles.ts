@@ -12,5 +12,18 @@ export const GlobalStyles = createGlobalStyle`
         font-family: 'Nunito', sans-serif;
     }
 
+    body {
+        background: var(--background);
+    }
+
+    :root {
+        --background: #f0f2f5;
+        --background2: #F4F4F4;
+
+        --black: #16161B;
+        --purple: #491E7C;
+        --white: #ffffff;
+        --yellow: #FBC105;
+    }
 
 `

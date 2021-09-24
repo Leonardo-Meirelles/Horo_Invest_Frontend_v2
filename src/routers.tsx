@@ -1,8 +1,12 @@
 import { Router } from '@reach/router'
+import { Portal } from './views/portal/index'
 
 export function Routers() {
+
   return (
-    <h1>Hello</h1>
+    <Router>
+        <Portal path='/*' />
+    </Router>
   )
 }
 
