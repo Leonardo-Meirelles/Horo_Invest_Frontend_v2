@@ -13,12 +13,7 @@ const INITIAL_STATE = {
 
 const reducer = (state = INITIAL_STATE, action: ActionProps) => {
     switch (action.type) {
-        case 'CHANGE_OPEN':
-            state.open = action.open
-            return { open: action.open}
-
-        case 'CHANGE_CLOSE':
-            state.open = action.open
+        case 'CHANGE_MODAL':
             return { open: action.open}
     
         default:

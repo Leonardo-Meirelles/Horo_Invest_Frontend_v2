@@ -1,14 +1,54 @@
 import { RouteComponentProps } from '@reach/router'
 import styled from 'styled-components'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import { Box, Button, Modal, Typography } from '@mui/material'
-import { useState } from 'react'
+import { Backdrop, Box, Button, Fade, Modal, TextField, Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
+import { toggleModal } from '../../store/loginModal/actions'
 import type { RootState } from '../../store/index'
+import LoginSharpIcon from '@mui/icons-material/LoginSharp'
+import AccountBoxIcon from '@mui/icons-material/AccountBox'
 
 
 interface LoginCardProps extends RouteComponentProps {
 
+}
+
+export function LoginModal(props: LoginCardProps) {
+
+    const dispatch = useDispatch()
+    const handleClose = () => dispatch(toggleModal())
+
+    const modalState = useSelector((state: RootState) => state.modal.open)
+
+    return (
+        <Modal
+            open={modalState}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+                timeout: 600,
+            }}
+        >
+            <Fade in={modalState}>
+                <Box sx={style}>
+                    <Container>
+                        <h2>Login</h2>
+                        <TextField label="Email" variant="filled" />
+                        <TextField label="Password" variant="filled" />
+
+                        <ButtonGroup>
+                            <Button variant="outlined" startIcon={<AccountBoxIcon />}>
+                                Sign in
+                            </Button>
+                            <Button variant="outlined" startIcon={<LoginSharpIcon />}>
+                                Login
+                            </Button>
+                        </ButtonGroup>
+                    </Container>
+                </Box>
+            </Fade>
+        </Modal>
+    )
 }
 
 const style = {
@@ -16,45 +56,25 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 600,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
-};
+    p: 0,
 
-export function LoginModal(props: LoginCardProps) {
-
-    const dispatch = useDispatch()
-    const handleClose = () => dispatch({type: 'CHANGE_CLOSE', open: false})
-
-    const modalState = useSelector((state: RootState) => state.modal.open)
-
-    return (
-        <Container>
-            <Modal
-                open={modalState}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Text in a modal
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
-                </Box>
-            </Modal>
-        </Container>
-    )
 }
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100vh;
     justify-content: space-evenly;
-    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    height: 24rem;
+    width: 100%;
+`
+
+const ButtonGroup = styled.div`
+    display: flex;
+    justify-content: space-around;
 `
