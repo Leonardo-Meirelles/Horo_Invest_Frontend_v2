@@ -2,8 +2,13 @@ import styled from 'styled-components'
 import { Button, ButtonGroup, Nav, NavItem, NavLink } from 'reactstrap'
 import { Link } from "@reach/router"
 import logo from '../../../../../assets/images/logo.png'
+import { useDispatch } from 'react-redux'
+
 
 export function NavBar() {
+
+  const dispatch = useDispatch()
+  const changeStoreModalState = () => dispatch({type: 'CHANGE_OPEN', open: true})
 
   return (
     <Container>
@@ -27,7 +32,7 @@ export function NavBar() {
       </Nav>
 
       <ButtonGroup>
-        <SButton>Entrar</SButton>
+        <SButton onClick={changeStoreModalState}>Entrar</SButton>
         <SButton>Sair</SButton>
       </ButtonGroup>
     </Container>
@@ -53,5 +58,5 @@ const SButton = styled(Button)`
 `
 
 const Logo = styled.img`
-        height: 6rem;
+  height: 6rem;
 `

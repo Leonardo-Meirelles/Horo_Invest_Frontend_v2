@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import { Footer } from './footer/footer'
 import { Header } from './header/header'
 
-type Props = {
+type LayoutPortalProps = {
     children: React.ReactNode;
 }
 
-export function Layout({children}:Props) {
+export function LayoutPortal({children}:LayoutPortalProps) {
     return (
         <Container>
             <Header />

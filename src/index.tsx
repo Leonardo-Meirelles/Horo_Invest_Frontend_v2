@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom'
 import './config/starter'
 import { Routers } from './routers'
 import { GlobalStyles } from './assets/styles/globalStyles'
+import { Provider } from 'react-redux'
+import store from './store/index'
 
 ReactDOM.render(
-  <React.Fragment>
+  <Provider store={store}>
 
     <Routers />
     <GlobalStyles />
 
-  </React.Fragment>,
+  </Provider>,
   document.getElementById('root')
 )
 
