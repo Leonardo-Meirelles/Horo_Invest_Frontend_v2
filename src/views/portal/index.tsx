@@ -18,10 +18,9 @@ export function Portal(props: RouteComponentProps) {
                     <Cripto exact path='/cripto' />
                     <About exact path='/about' />
                 </Router>
+                <LoginModal />
             </LayoutPortal>
-            
-            <LoginModal />
-            
+
         </>
     )
 }

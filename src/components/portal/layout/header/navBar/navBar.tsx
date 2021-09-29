@@ -3,12 +3,13 @@ import { Button, ButtonGroup, Nav, NavItem, NavLink } from 'reactstrap'
 import { Link } from "@reach/router"
 import logo from '../../../../../assets/images/logo.png'
 import { useDispatch } from 'react-redux'
+import { toggleModal } from '../../../../../store/loginModal/actions'
 
 
 export function NavBar() {
 
   const dispatch = useDispatch()
-  const changeStoreModalState = () => dispatch({type: 'CHANGE_OPEN', open: true})
+  const changeStoreModalState = () => dispatch(toggleModal())
 
   return (
     <Container>
