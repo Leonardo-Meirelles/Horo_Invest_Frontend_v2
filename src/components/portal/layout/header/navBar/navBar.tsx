@@ -19,7 +19,7 @@ export function NavBar() {
           <SNavLink tag={Link} to='/'>Home</SNavLink >
         </NavItem>
         <NavItem>
-          <SNavLink tag={Link} to="stocks">Trading Stocks</SNavLink >
+          <SNavLink tag={Link} to="/stocks">Trading Stocks</SNavLink >
         </NavItem>
         <NavItem>
           <SNavLink tag={Link} to="/currency">Currency Exchange</SNavLink >
