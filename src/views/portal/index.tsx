@@ -1,5 +1,5 @@
 import { RouteComponentProps, Router } from '@reach/router'
-import { LayoutPortal } from '../../components/portal/layout/layout'
+import { LayoutPortal } from '../../components/portal/layout/layoutPortal'
 import { LoginModal } from '../../components/portal/loginModal'
 import { About } from './about'
 import { Cripto } from './cripto'
