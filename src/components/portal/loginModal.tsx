@@ -2,7 +2,7 @@ import { navigate } from '@reach/router'
 import styled from 'styled-components'
 import { Backdrop, Box, Button, Fade, Modal, TextField } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleModal } from '../../store/loginModal/actions'
+import { toggleModal } from '../../store/openModal/action'
 import type { RootState } from '../../store/index'
 import { useState } from 'react'
 import { FiUserPlus, FiUserCheck } from "react-icons/fi"
@@ -21,6 +21,7 @@ export function LoginModal() {
         // toast.error('deu certo', {
         //     position: 'top-right'
         // })
+        dispatch(toggleModal())
         navigate('/user')
     }
 

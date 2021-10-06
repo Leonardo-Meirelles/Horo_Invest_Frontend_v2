@@ -1,27 +1,28 @@
 interface ActionProps {
     type: string
-    data: Stocks
+    data: Cryptos
 }
 
 interface InitialStateStocks {
-    stocks: Stocks
+    cryptos: Cryptos
 }
- 
-type Stocks = {
+
+type Cryptos = {
     id: number
-    stockName: string
-    stockPrice: number
+    cryptoName: string
+    cryptoPrice: number
 }[]
 
 const INITIAL_STATE: InitialStateStocks = {
-    stocks: []
+    cryptos: []
 }
+
 
 const reducer = (state = INITIAL_STATE, action: ActionProps) => {
     switch (action.type) {
-        case 'GET_STOCKS':
-            return { ...state, stocks: action.data }
-
+        case 'GET_CRYPTOS':
+            return {...state, cryptos: action.data}
+    
         default:
             return state
     }

@@ -1,19 +1,28 @@
-
 import { RouteComponentProps } from "@reach/router"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import styled from "styled-components"
-
-export interface StocksProps {
-    id: number;
-    stockName: string;
-    stockPrice: number;
-}
+import { useDispatch, useSelector } from 'react-redux'
+import { getCryptos } from "../../store/cryptos/action"
+import { RootState } from "../../store"
+import { CryptoCard } from "../../components/private/crypto/cryptosCards"
+import { BuyModal } from "../../components/private/buyModal"
 
 export function ShowCripto(props: RouteComponentProps) {
 
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getCryptos())
+    }, [])
+
+    const cryptos = useSelector((state: RootState) => state.cryptos.cryptos)
+
     return (
         <Container>
-            
+            {cryptos.map(crypto => (
+                <CryptoCard key={crypto.id} cryptoInfo={crypto}/>
+            ))}
+            <BuyModal />
         </Container>
     )
 }

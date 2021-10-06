@@ -5,31 +5,33 @@ import { useDispatch } from "react-redux";
 import { toggleModal } from "../../../store/openModal/action";
 import { setModalAssets } from "../../../store/buyModalAssets/action";
 
-interface StockCardProps {
+interface CryptoCardProps {
     key: number;
-    stockInfo: {
+    cryptoInfo: {
         id: number;
-        stockName: string;
-        stockPrice: number;
+        cryptoName: string;
+        cryptoPrice: number;
     }
 }
 
-export function StockCard({ stockInfo }: StockCardProps) {
+export function CryptoCard({ cryptoInfo }: CryptoCardProps) {
+
+    const { id, cryptoName, cryptoPrice } = cryptoInfo
 
     const dispatch = useDispatch()
+    
     const handleOpen = () => {
-        dispatch(setModalAssets(id, stockName, stockPrice, 'stock'))
+        dispatch(setModalAssets(id, cryptoName, cryptoPrice, 'crypto'))
         dispatch(toggleModal())
     }
 
-    const { id, stockName, stockPrice } = stockInfo
 
     return (
         <SPaper elevation={24}>
             <Content>
-                <h2>{stockName}</h2>
+                <h2>{cryptoName}</h2>
                 <hr />
-                <h2>R$ {stockPrice}</h2>
+                <h2>R$ {cryptoPrice}</h2>
                 <hr />
                 <a href="#"><AiOutlinePlusSquare /> <br /> More Info </a>
                 <Button onClick={handleOpen}>Open modal</Button>
