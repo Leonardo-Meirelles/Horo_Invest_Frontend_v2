@@ -5,35 +5,35 @@ import { useDispatch } from "react-redux";
 import { toggleModal } from "../../../store/openModal/action";
 import { setModalAssets } from "../../../store/buyModalAssets/action";
 
-interface CryptoCardProps {
+interface CurrencyCardProps {
     key: number
-    cryptoInfo: {
+    currencyInfo: {
         id: number
-        cryptoName: string
-        cryptoPrice: number
-        cryptoPriceBefore: number
+        currencyName: string
+        currencyPrice: number
+        currencyPriceBefore: number
     }
 }
 
-export function CryptoCard({ cryptoInfo }: CryptoCardProps) {
+export function CurrencyCard({ currencyInfo }: CurrencyCardProps) {
 
-    const { id, cryptoName, cryptoPrice, cryptoPriceBefore } = cryptoInfo
+    const { id, currencyName, currencyPrice, currencyPriceBefore } = currencyInfo
 
-    const isCheaper = cryptoPrice < cryptoPriceBefore ? true : false
+    const isCheaper = currencyPrice < currencyPriceBefore ? true : false
 
     const dispatch = useDispatch()
     
     const handleOpen = () => {
-        dispatch(setModalAssets(id, cryptoName, cryptoPrice, 'Crypto Currency'))
+        dispatch(setModalAssets(id, currencyName, currencyPrice, 'Currency Exchange'))
         dispatch(toggleModal())
     }
 
     return (
         <SPaper elevation={24} isCheaper={isCheaper}>
             <Content>
-                <h2>{cryptoName}</h2>
+                <h2>{currencyName}</h2>
                 <hr />
-                <h2>R$ {cryptoPrice}</h2>
+                <h2>R$ {currencyPrice}</h2>
                 <hr />
                 <button type='button' onClick={handleOpen}><AiOutlinePlusSquare /> <br /> Buy now </button>
             </Content>

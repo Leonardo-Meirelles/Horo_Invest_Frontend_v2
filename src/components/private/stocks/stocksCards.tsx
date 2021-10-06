@@ -1,4 +1,4 @@
-import { Button, Paper } from "@mui/material"
+import { Paper } from "@mui/material"
 import styled from "styled-components"
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ interface StockCardProps {
         id: number;
         stockName: string;
         stockPrice: number;
+        stockPriceBefore: number
     }
 }
 
@@ -18,39 +19,41 @@ export function StockCard({ stockInfo }: StockCardProps) {
 
     const dispatch = useDispatch()
     const handleOpen = () => {
-        dispatch(setModalAssets(id, stockName, stockPrice, 'stock'))
+        dispatch(setModalAssets(id, stockName, stockPrice, 'Trading Stocks'))
         dispatch(toggleModal())
     }
 
-    const { id, stockName, stockPrice } = stockInfo
+    const { id, stockName, stockPrice, stockPriceBefore } = stockInfo
+
+    const isCheaper = stockPrice < stockPriceBefore ? true : false
 
     return (
-        <SPaper elevation={24}>
+        <SPaper elevation={24} isCheaper={isCheaper}>
             <Content>
                 <h2>{stockName}</h2>
                 <hr />
                 <h2>R$ {stockPrice}</h2>
                 <hr />
-                <a href="#"><AiOutlinePlusSquare /> <br /> More Info </a>
-                <Button onClick={handleOpen}>Open modal</Button>
+                <button type='button' onClick={handleOpen}><AiOutlinePlusSquare /> <br /> Buy now </button>
             </Content>
         </SPaper>
     )
 }
 
-const SPaper = styled(Paper)`
+interface SPaperProps {
+    isCheaper: boolean
+}
+
+const SPaper = styled(Paper)<SPaperProps>`
     width: 15rem;
     height: 15rem;
     text-align: center;
-    border: 2px solid green;
+    border: 2px solid;
+    border-color: ${(props) => props.isCheaper === true ? 'red' : 'green'};
 
     &:hover {
         
         filter: brightness(0.97);
-    }
-/* Retirar depois */
-    &:first-child{
-        border: 2px solid red;
     }
 `
 
@@ -66,13 +69,14 @@ const Content = styled.div`
         font-size: 1.5rem;
     }
         
-    a {
+    button {
         text-decoration: none;
         color: var(--yellow);
+        border: none;
+        background: transparent;
             
-        /* &:hover {
-            filter: brightness(0.9);
-            } */
+        &:hover {
+            filter: brightness(0.85);
+            }
     }
-
 `

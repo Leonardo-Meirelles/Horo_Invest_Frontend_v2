@@ -15,15 +15,14 @@ export function ShowStocks(props: RouteComponentProps) {
         dispatch(getStocks())
     }, [])
 
-    const stocks = useSelector((state: RootState) => state.stocks.stocks) 
+    const stocks = useSelector((state: RootState) => state.stocks.stocks)
 
     return (
         <Container>
             {stocks.map((stock) => (
                 <StockCard key={stock.id} stockInfo={stock} />
-
-                ))}
-                <BuyModal />
+            ))}
+            <BuyModal />
         </Container>
     )
 }

@@ -11,6 +11,7 @@ type Stocks = {
     id: number
     stockName: string
     stockPrice: number
+    stockPriceBefore: number
 }[]
 
 const INITIAL_STATE: InitialStateStocks = {

@@ -1,13 +1,13 @@
-// Estado inicial
-// Função que retorna o estado
-// Export do estado como default
-
 interface ActionProps { 
     type: string
     open: boolean
 }
 
-const INITIAL_STATE = {
+interface InitialStateOpen {
+    open: boolean
+}
+
+const INITIAL_STATE: InitialStateOpen = {
     open: false
 }
 

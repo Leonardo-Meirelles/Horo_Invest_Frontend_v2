@@ -1,16 +1,20 @@
 import { AppDispatch, AppThunk } from "../index"
 
-export const setModalAssets = (assetId:any, assetName:any, assetPrice:any, assetType:any): AppThunk => {
+export const setModalAssets = (
+    assetId: number,
+    assetName: string,
+    assetPrice: number,
+    assetType: string): AppThunk => {
 
     return async (dispatch: AppDispatch) => {
 
         const asset = {
-            assetId, 
-            assetName, 
+            assetId,
+            assetName,
             assetPrice,
             assetType
         }
-        
-        dispatch({type: 'SET_ASSETS', data: asset})
+
+        dispatch({ type: 'SET_ASSETS', data: asset })
     }
 }

@@ -3,7 +3,7 @@ interface ActionProps {
     data: Cryptos
 }
 
-interface InitialStateStocks {
+interface InitialStateCryptos {
     cryptos: Cryptos
 }
 
@@ -11,12 +11,12 @@ type Cryptos = {
     id: number
     cryptoName: string
     cryptoPrice: number
+    cryptoPriceBefore: number
 }[]
 
-const INITIAL_STATE: InitialStateStocks = {
+const INITIAL_STATE: InitialStateCryptos = {
     cryptos: []
 }
-
 
 const reducer = (state = INITIAL_STATE, action: ActionProps) => {
     switch (action.type) {

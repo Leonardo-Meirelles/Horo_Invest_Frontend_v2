@@ -4,6 +4,7 @@ import OpenModalReducer from './openModal/reducer'
 import BuyModalReducer from './buyModalAssets/reducer'
 import StocksReducer from './stocks/reducer'
 import CryptosReducer from './cryptos/reducer'
+import CurrencyReducer from './currencies/reducer'
 import thunk, { ThunkAction } from 'redux-thunk'
 
 const reducers = combineReducers({
@@ -11,6 +12,7 @@ const reducers = combineReducers({
     modalAssets: BuyModalReducer,
     stocks: StocksReducer,
     cryptos: CryptosReducer,
+    currencies: CurrencyReducer
 })
 
 //middlewares

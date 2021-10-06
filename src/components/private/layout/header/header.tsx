@@ -18,7 +18,7 @@ export function Header() {
                 <SDropdownMenu>
                     <SDropdownItem header>Market</SDropdownItem>
                     <SDropdownItem tag={Link} exact="true" to='/user/stocks'>Trading Stocks</SDropdownItem>
-                    <SDropdownItem tag={Link} exact="true" to='/user/currency'>Currency Exchange</SDropdownItem>
+                    <SDropdownItem tag={Link} exact="true" to='/user/currencies'>Currency Exchange</SDropdownItem>
                     <SDropdownItem tag={Link} exact="true" to='/user/cripto'>Cripto Currency</SDropdownItem>
 
                     <SDropdownItem divider />
