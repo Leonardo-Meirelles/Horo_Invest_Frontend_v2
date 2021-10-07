@@ -11,30 +11,31 @@ export function Header() {
 
     return (
         <Container>
-            <div>
-                <h4>Olá, Leonardo!</h4>
-            </div>
-
-            <SButtonDropdown direction="left" isOpen={dropdownOpen} toggle={toggle}>
+            <SButtonDropdown direction="down" isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle caret color="secondary" size="lg">
                     Menu
                 </DropdownToggle>
-                <DropdownMenu>
-                    <DropdownItem header>Market</DropdownItem>
-                    <DropdownItem tag={Link} exact="true" to='/user/stocks'>Trading Stocks</DropdownItem>
-                    <DropdownItem tag={Link} exact="true" to='/user/currency'>Currency Exchange</DropdownItem>
-                    <DropdownItem tag={Link} exact="true" to='/user/cripto'>Cripto Currency</DropdownItem>
+                <SDropdownMenu>
+                    <SDropdownItem header>Market</SDropdownItem>
+                    <SDropdownItem tag={Link} exact="true" to='/user/stocks'>Trading Stocks</SDropdownItem>
+                    <SDropdownItem tag={Link} exact="true" to='/user/currencies'>Currency Exchange</SDropdownItem>
+                    <SDropdownItem tag={Link} exact="true" to='/user/cripto'>Cripto Currency</SDropdownItem>
 
-                    <DropdownItem divider />
+                    <SDropdownItem divider />
 
-                    <DropdownItem header>User Info</DropdownItem>
-                    <DropdownItem>User Wallet</DropdownItem>
+                    <SDropdownItem header>Profile</SDropdownItem>
+                    <SDropdownItem>Wallet</SDropdownItem>
+                    <SDropdownItem>Info</SDropdownItem>
 
-                    <DropdownItem divider />
+                    <SDropdownItem divider />
 
-                    <DropdownItem>Sair</DropdownItem>
-                </DropdownMenu>
+                    <SDropdownItem>Sair</SDropdownItem>
+                </SDropdownMenu>
             </SButtonDropdown>
+
+            <div>
+                <h4>Olá, Leonardo!</h4>
+            </div>
 
         </Container>
     )
@@ -42,7 +43,7 @@ export function Header() {
 
 const Container = styled.header`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items:center;
     background: var(--black);
     padding: 0.5rem 1.5rem;
@@ -53,8 +54,18 @@ const Container = styled.header`
 `
 
 const SButtonDropdown = styled(ButtonDropdown)`
-    width: 15rem;
+    width: 20rem;    
 
+`
+
+const SDropdownMenu = styled(DropdownMenu)`
+    width: 100%;
+    height: 30rem;
     
+`
+
+const SDropdownItem = styled(DropdownItem)`
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
 `
 

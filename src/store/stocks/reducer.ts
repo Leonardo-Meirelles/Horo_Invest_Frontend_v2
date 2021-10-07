@@ -1,19 +1,18 @@
 interface ActionProps {
     type: string
-    data: [{
-        id: number
-        stockName: string
-        stockPrice: number
-    }]
+    data: Stocks
 }
 
 interface InitialStateStocks {
-    stocks: {
-        id: number
-        stockName: string
-        stockPrice: number
-    }[]
+    stocks: Stocks
 }
+ 
+type Stocks = {
+    id: number
+    stockName: string
+    stockPrice: number
+    stockPriceBefore: number
+}[]
 
 const INITIAL_STATE: InitialStateStocks = {
     stocks: []
@@ -29,4 +28,4 @@ const reducer = (state = INITIAL_STATE, action: ActionProps) => {
     }
 }
 
-export default reducer;
+export default reducer

@@ -2,11 +2,12 @@ import { navigate } from '@reach/router'
 import styled from 'styled-components'
 import { Backdrop, Box, Button, Fade, Modal, TextField } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleModal } from '../../store/loginModal/actions'
+import { toggleModal } from '../../store/openModal/action'
 import type { RootState } from '../../store/index'
 import { useState } from 'react'
 import { FiUserPlus, FiUserCheck } from "react-icons/fi"
 import { RiLoginBoxLine } from "react-icons/ri"
+import closeImg from '../../assets/images/close.svg'
 // import { toast } from 'react-hot-toast'
 
 export function LoginModal() {
@@ -21,6 +22,7 @@ export function LoginModal() {
         // toast.error('deu certo', {
         //     position: 'top-right'
         // })
+        dispatch(toggleModal())
         navigate('/user')
     }
 
@@ -34,8 +36,11 @@ export function LoginModal() {
                 timeout: 800,
             }}
         >
-            <Fade in={modalState}>
-                <Box sx={style}>
+            <Box sx={style}>
+                <CloseButton onClick={handleClose}>
+                    <img src={closeImg} alt="Close modal" />
+                </CloseButton>
+                <Fade in={modalState}>
                     <Container>
                         <h2>Login</h2>
 
@@ -76,8 +81,8 @@ export function LoginModal() {
                             {hasUser ? 'Login' : 'Sigin'}
                         </Button>
                     </Container>
-                </Box>
-            </Fade>
+                </Fade>
+            </Box>
         </Modal>
     )
 }
@@ -93,6 +98,18 @@ const style = {
     boxShadow: 24,
     p: 0,
 }
+
+const CloseButton = styled.button`
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    border: 0;
+    background: transparent;
+    transition: filter 0.2s;
+        &:hover {
+            filter: brightness(0.6);
+        }
+`
 
 const Container = styled.div`
     display: flex;

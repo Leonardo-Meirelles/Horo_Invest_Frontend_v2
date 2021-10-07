@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Nav, NavItem, NavLink } from 'reactstrap'
 import { Link } from "@reach/router"
 import logo from '../../../../../assets/images/logo.png'
 import { useDispatch } from 'react-redux'
-import { toggleModal } from '../../../../../store/loginModal/actions'
+import { toggleModal } from '../../../../../store/openModal/action'
 
 
 export function NavBar() {

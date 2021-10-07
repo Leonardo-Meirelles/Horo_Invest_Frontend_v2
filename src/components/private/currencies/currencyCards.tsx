@@ -5,34 +5,35 @@ import { useDispatch } from "react-redux";
 import { toggleModal } from "../../../store/openModal/action";
 import { setModalAssets } from "../../../store/buyModalAssets/action";
 
-interface StockCardProps {
-    key: number;
-    stockInfo: {
-        id: number;
-        stockName: string;
-        stockPrice: number;
-        stockPriceBefore: number
+interface CurrencyCardProps {
+    key: number
+    currencyInfo: {
+        id: number
+        currencyName: string
+        currencyPrice: number
+        currencyPriceBefore: number
     }
 }
 
-export function StockCard({ stockInfo }: StockCardProps) {
+export function CurrencyCard({ currencyInfo }: CurrencyCardProps) {
+
+    const { id, currencyName, currencyPrice, currencyPriceBefore } = currencyInfo
+
+    const isCheaper = currencyPrice < currencyPriceBefore ? true : false
 
     const dispatch = useDispatch()
+    
     const handleOpen = () => {
-        dispatch(setModalAssets(id, stockName, stockPrice, 'Trading Stocks'))
+        dispatch(setModalAssets(id, currencyName, currencyPrice, 'Currency Exchange'))
         dispatch(toggleModal())
     }
-
-    const { id, stockName, stockPrice, stockPriceBefore } = stockInfo
-
-    const isCheaper = stockPrice < stockPriceBefore ? true : false
 
     return (
         <SPaper elevation={24} isCheaper={isCheaper}>
             <Content>
-                <h2>{stockName}</h2>
+                <h2>{currencyName}</h2>
                 <hr />
-                <h2>R$ {stockPrice}</h2>
+                <h2>R$ {currencyPrice}</h2>
                 <hr />
                 <button type='button' onClick={handleOpen}><AiOutlinePlusSquare /> <br /> Buy now </button>
             </Content>
