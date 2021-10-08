@@ -24,7 +24,7 @@ export function CryptoCard({ cryptoInfo }: CryptoCardProps) {
     const dispatch = useDispatch()
     
     const handleOpen = () => {
-        dispatch(setModalAssets(id, cryptoName, cryptoPrice, 'Crypto Currency'))
+        dispatch(setModalAssets(id, cryptoName, cryptoPrice, 'Cryptocurrency'))
         dispatch(toggleModal())
     }
 

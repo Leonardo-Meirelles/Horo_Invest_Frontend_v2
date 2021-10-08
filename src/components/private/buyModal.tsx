@@ -47,7 +47,7 @@ export function BuyModal() {
                 orderTotal: ''
             }
         ]))
-        if (order.length == 5) {
+        if (order.length === 5) {
             toast.error(
                 'The limit of orders to be done at once is 6. Please complete this order and open a new one', {
                 style: {
@@ -123,7 +123,7 @@ export function BuyModal() {
                         <IconButton
                             color="warning"
                             onClick={() => handleAddInputFields()}
-                            disabled={order.length == 6 ? true : false}
+                            disabled={order.length === 6 ? true : false}
                             title='Add'
                         >
                             <RiPlayListAddFill />
@@ -132,9 +132,8 @@ export function BuyModal() {
                         <InputBox>
                             <InputContent>
                                 {order.map((item, index) => (
-                                    <TextFields>
+                                    <TextFields key={index}>
                                         <TextField
-                                            key={index}
                                             name='orderQuantity'
                                             value={item.orderQuantity}
                                             onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(index, event)}
@@ -144,7 +143,6 @@ export function BuyModal() {
                                         />
 
                                         <TextField
-                                            key={index}
                                             name='orderPrice'
                                             value={item.orderPrice}
                                             onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(index, event)}
@@ -154,7 +152,6 @@ export function BuyModal() {
                                         />
 
                                         <TextField
-                                            key={index}
                                             name='orderTotal'
                                             value={item.orderTotal}
                                             onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(index, event)}
@@ -166,7 +163,7 @@ export function BuyModal() {
                                         <IconButton
                                             color="warning"
                                             onClick={() => handleRemoveInputFields(index)}
-                                            disabled={order.length == 1 ? true : false}
+                                            disabled={order.length === 1 ? true : false}
                                             title='Remove'
                                         >
                                             <GoDiffRemoved />
