@@ -1,29 +1,48 @@
-import { navigate } from '@reach/router'
 import styled from 'styled-components'
 import { Backdrop, Box, Button, Fade, Modal, TextField } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleModal } from '../../store/openModal/action'
 import type { RootState } from '../../store/index'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { FiUserPlus, FiUserCheck } from "react-icons/fi"
 import { RiLoginBoxLine } from "react-icons/ri"
 import closeImg from '../../assets/images/close.svg'
+import { loginAuthentication } from '../../store/authentication/action'
 // import { toast } from 'react-hot-toast'
+
+interface LoginForm {
+    name?: string
+    email: string
+    password: string
+}
 
 export function LoginModal() {
     const [hasUser, setHasUser] = useState(true)
+    const [loginForm, setLoginForm] = useState<LoginForm>({
+        email: '',
+        password: ''
+    })
 
     const dispatch = useDispatch()
     const handleClose = () => dispatch(toggleModal())
 
     const modalState = useSelector((state: RootState) => state.modal.open)
 
-    const handleLoginClick = () => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setLoginForm((prevState) => ({
+            ...prevState,
+            [event.target.name]: event.target.value
+        }))
+    }
+
+    const handleLoginSubmit = () => {
         // toast.error('deu certo', {
         //     position: 'top-right'
         // })
-        dispatch(toggleModal())
-        navigate('/user')
+        // dispatch(toggleModal())
+        // navigate('/user')
+        dispatch(loginAuthentication(loginForm))
+
     }
 
     return (
@@ -47,7 +66,10 @@ export function LoginModal() {
                         <ButtonGroup>
                             <SLink
                                 type="button"
-                                onClick={() => setHasUser(false)}
+                                onClick={() => {
+                                    setHasUser(false)
+                                    setLoginForm({name: '', email: '', password: '' })
+                                }}
                             >
                                 <FiUserPlus />
                                 <br />
@@ -56,7 +78,10 @@ export function LoginModal() {
 
                             <SLink
                                 type="button"
-                                onClick={() => setHasUser(true)}
+                                onClick={() => {
+                                    setHasUser(true)
+                                    setLoginForm({ email: '', password: '' })
+                                }}
                             >
                                 <FiUserCheck />
                                 <br />
@@ -67,16 +92,34 @@ export function LoginModal() {
                         {hasUser ?
                             ''
                             :
-                            <TextField label="Name" variant="filled" />
+                            <TextField
+                                label='Name'
+                                variant='filled'
+                                name='name'
+                                value={loginForm.name || ''}
+                                onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
+                            />
                         }
-                        <TextField label="Email" variant="filled" />
-                        <TextField label="Password" variant="filled" />
+                        <TextField
+                            label='Email'
+                            name='email'
+                            value={loginForm.email || ''}
+                            variant='filled'
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
+                        />
+                        <TextField
+                            label='Password'
+                            variant="filled"
+                            name='password'
+                            value={loginForm.password || ''}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
+                        />
 
                         <Button
-                            variant="outlined"
+                            variant='outlined'
                             endIcon={<RiLoginBoxLine />}
                             color='success'
-                            onClick={handleLoginClick}
+                            onClick={handleLoginSubmit}
                         >
                             {hasUser ? 'Login' : 'Sigin'}
                         </Button>

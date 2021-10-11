@@ -1,5 +1,5 @@
 import { AppDispatch, AppThunk } from "../index"
-import { getCryptosService } from '../../services/cryptosServices'
+import { getCryptosService } from '../../services/cryptosService'
 
 export const getCryptos = (): AppThunk => {
 

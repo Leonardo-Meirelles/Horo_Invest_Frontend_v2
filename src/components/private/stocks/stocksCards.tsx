@@ -19,16 +19,16 @@ export function StockCard({ stockInfo }: StockCardProps) {
 
     const dispatch = useDispatch()
     const handleOpen = () => {
-        dispatch(setModalAssets(id, stockName, stockPrice, 'Trading Stocks'))
+        dispatch(setModalAssets(id, stockName, stockPrice, 'Stocks'))
         dispatch(toggleModal())
     }
 
     const { id, stockName, stockPrice, stockPriceBefore } = stockInfo
 
-    const isCheaper = stockPrice < stockPriceBefore ? true : false
+    const isCheaper = stockPrice < stockPriceBefore ? 'true' : 'false'
 
     return (
-        <SPaper elevation={24} isCheaper={isCheaper}>
+        <SPaper elevation={24} ischeaper={isCheaper}>
             <Content>
                 <h2>{stockName}</h2>
                 <hr />
@@ -41,7 +41,7 @@ export function StockCard({ stockInfo }: StockCardProps) {
 }
 
 interface SPaperProps {
-    isCheaper: boolean
+    ischeaper: 'true' | 'false'
 }
 
 const SPaper = styled(Paper)<SPaperProps>`
@@ -49,7 +49,7 @@ const SPaper = styled(Paper)<SPaperProps>`
     height: 15rem;
     text-align: center;
     border: 2px solid;
-    border-color: ${(props) => props.isCheaper === true ? 'red' : 'green'};
+    border-color: ${(props) => props.ischeaper === 'true' ? 'red' : 'green'};
 
     &:hover {
         
