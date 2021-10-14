@@ -1,4 +1,4 @@
-import { createServer, Model } from 'miragejs'
+import { createServer, Model, Response } from 'miragejs'
 
 export function server() {
     createServer({
@@ -6,6 +6,7 @@ export function server() {
             stock: Model,
             crypto: Model,
             currency: Model,
+            order: Model
         },
 
         seeds(server) {
@@ -51,7 +52,35 @@ export function server() {
                     { id: 10, currencyName: 'dogcoin', currencyPrice: 1.22, currencyPriceBefore: 1.24 },
                     { id: 11, currencyName: 'dogcoin', currencyPrice: 2.45, currencyPriceBefore: 2.35 },
                     { id: 12, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 13, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 14, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 15, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 16, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 17, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 18, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 19, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 20, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 21, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 22, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 23, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 24, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 25, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 26, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 27, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
+                    { id: 28, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
                 ],
+                orders: [
+                    { id: 1, orderName: 'OIBR3', orderPrice: 5.51, orderTotal: 550 },
+                    { id: 2, orderName: 'dogcoin', orderPrice: 57.43, orderTotal: 550 },
+                    { id: 3, orderName: 'ethereum', orderPrice: 2.22, orderTotal: 550 },
+                    { id: 4, orderName: 'PTBR3', orderPrice: 5.00, orderTotal: 550 },
+                    { id: 5, orderName: 'OIBR3', orderPrice: 5.23, orderTotal: 550 },
+                    { id: 6, orderName: 'lalalal', orderPrice: 8.50, orderTotal: 550 },
+                    { id: 7, orderName: 'MGLU3', orderPrice: 8.99, orderTotal: 550 },
+                    { id: 8, orderName: 'dogcoin', orderPrice: 7.90, orderTotal: 550 },
+                    { id: 9, orderName: 'Vivo', orderPrice: 5.55, orderTotal: 550 },
+                    { id: 10, orderName: 'Claro', orderPrice: 6.00, orderTotal: 550 },
+                ]
             })
         },
 
@@ -70,6 +99,15 @@ export function server() {
                 return this.schema.all('currency')
             })
 
+            this.get('/orders/:userEmail', (schema, request) => {
+                let attr = request.params.userEmail
+                console.log('🚀 ~ attr', attr)
+                if (attr == 'leonardomeirelles@terra.com.br') {
+
+                    return this.schema.all('order')
+                }
+            })
+
             this.post('/login', (schema, request) => {
                 let attr = JSON.parse(request.requestBody)
                 if (
@@ -79,11 +117,15 @@ export function server() {
                 ) {
                     return {
                         type: 'bearer',
-                        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6Imxlb25hcmRvbWVpcmVsbGVzQHRlcnJhLmNvbS5iciIsInBhc3N3b3JkIjoiMTIzNDUiLCJ1c2VyX3R5cGUiOjF9.WE59vgRnM1rulS57FBobaXXbWuO0tHJMvQWI6eRx6Tk'
+                        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiTGVvIiwiZW1haWwiOiJsZW9uYXJkb21laXJlbGxlc0B0ZXJyYS5jb20uYnIiLCJwYXNzd29yZCI6IjEyMzQ1IiwidXNlcl90eXBlIjoxLCJzdGF0dXMiOnRydWV9.uqYVX_kvDZMJXud1j-hRe2fTvp6PVuv2j0xVHrDgCgw'
                     }
 
                 } else {
-                    throw new Error('Não deu certo')
+                    return new Response(
+                        400,
+                        {},
+                        { errors: 'User not found' }
+                    )
                 }
             })
         },

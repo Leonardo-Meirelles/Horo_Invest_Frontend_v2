@@ -1,42 +1,56 @@
 import { Link } from "@reach/router"
 import { useState } from "react"
-import { ButtonDropdown, DropdownToggle, DropdownItem, DropdownMenu } from "reactstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { ButtonDropdown, DropdownToggle, DropdownItem, DropdownMenu, Button } from "reactstrap"
 import styled from "styled-components"
+import { logoutAuthentication } from "../../../../store/authentication/action"
+import { RootState } from "../../../../store/index"
 
 export function Header() {
+
+    const dispatch = useDispatch()
 
     const [dropdownOpen, setOpen] = useState(false)
 
     const toggle = () => setOpen(!dropdownOpen)
 
+    const user: any = useSelector((state: RootState) => state.authentication?.user)  
+
+    const handleLogout = () => {
+
+        dispatch(logoutAuthentication())
+    }
+
     return (
         <Container>
+            <div>
+                <h4>Hello, {user.name}!</h4>
+            </div>
             <SButtonDropdown direction="down" isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle caret color="secondary" size="lg">
                     Menu
                 </DropdownToggle>
                 <SDropdownMenu>
                     <SDropdownItem header>Market</SDropdownItem>
-                    <SDropdownItem tag={Link} exact="true" to='/user/stocks'>Stocks</SDropdownItem>
-                    <SDropdownItem tag={Link} exact="true" to='/user/currencies'>Currency</SDropdownItem>
-                    <SDropdownItem tag={Link} exact="true" to='/user/cripto'>Criptocurrency</SDropdownItem>
+                    <SDropdownItem tag={Link} to='/user/stocks'>Stocks</SDropdownItem>
+                    <SDropdownItem tag={Link} to='/user/currencies'>Currency</SDropdownItem>
+                    <SDropdownItem tag={Link} to='/user/cripto'>Criptocurrency</SDropdownItem>
 
                     <SDropdownItem divider />
 
                     <SDropdownItem header>Profile</SDropdownItem>
-                    <SDropdownItem>Wallet</SDropdownItem>
-                    <SDropdownItem>Info</SDropdownItem>
+                    <SDropdownItem tag={Link} to='/user/wallet'>Wallet</SDropdownItem>
+                    <SDropdownItem tag={Link} to='/user/stocks'>Info</SDropdownItem>
 
-                    <SDropdownItem divider />
-
-                    <SDropdownItem>Sair</SDropdownItem>
                 </SDropdownMenu>
             </SButtonDropdown>
 
-            <div>
-                <h4>Olá, Leonardo!</h4>
-            </div>
-
+            <Button
+                color="secondary"
+                onClick={() => handleLogout()}
+            >
+                Logout
+            </Button>
         </Container>
     )
 }
@@ -60,12 +74,10 @@ const SButtonDropdown = styled(ButtonDropdown)`
 
 const SDropdownMenu = styled(DropdownMenu)`
     width: 100%;
-    height: 30rem;
-    
+    height: 25rem;
 `
 
 const SDropdownItem = styled(DropdownItem)`
     font-size: 1.5rem;
     margin-top: 0.5rem;
 `
-

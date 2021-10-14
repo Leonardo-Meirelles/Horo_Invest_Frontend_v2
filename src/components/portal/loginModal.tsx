@@ -8,9 +8,8 @@ import { FiUserPlus, FiUserCheck } from "react-icons/fi"
 import { RiLoginBoxLine } from "react-icons/ri"
 import closeImg from '../../assets/images/close.svg'
 import { loginAuthentication } from '../../store/authentication/action'
-// import { toast } from 'react-hot-toast'
 
-interface LoginForm {
+export interface LoginForm {
     name?: string
     email: string
     password: string
@@ -28,6 +27,16 @@ export function LoginModal() {
 
     const modalState = useSelector((state: RootState) => state.modal.open)
 
+    const handleCreateAccount = () => {
+        setHasUser(false)
+        setLoginForm({ name: '', email: '', password: '' })
+    }
+
+    const handleAlreadyHasAccount = () => {
+        setHasUser(true)
+        setLoginForm({ email: '', password: '' })
+    }
+
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setLoginForm((prevState) => ({
             ...prevState,
@@ -36,14 +45,18 @@ export function LoginModal() {
     }
 
     const handleLoginSubmit = () => {
-        // toast.error('deu certo', {
-        //     position: 'top-right'
-        // })
-        // dispatch(toggleModal())
-        // navigate('/user')
-        dispatch(loginAuthentication(loginForm))
 
+        dispatch(loginAuthentication(loginForm))
+        dispatch(toggleModal())
     }
+
+    const authenticationIsLoading = useSelector((state: RootState) => state.authentication.loading)
+
+    const isLoginValid = 
+        Object.keys(loginForm).length > 0 &&
+        loginForm?.email.length > 0 &&
+        loginForm?.password.length > 0
+
 
     return (
         <Modal
@@ -66,10 +79,7 @@ export function LoginModal() {
                         <ButtonGroup>
                             <SLink
                                 type="button"
-                                onClick={() => {
-                                    setHasUser(false)
-                                    setLoginForm({name: '', email: '', password: '' })
-                                }}
+                                onClick={() => handleCreateAccount()}
                             >
                                 <FiUserPlus />
                                 <br />
@@ -78,10 +88,7 @@ export function LoginModal() {
 
                             <SLink
                                 type="button"
-                                onClick={() => {
-                                    setHasUser(true)
-                                    setLoginForm({ email: '', password: '' })
-                                }}
+                                onClick={() => handleAlreadyHasAccount()}
                             >
                                 <FiUserCheck />
                                 <br />
@@ -98,6 +105,8 @@ export function LoginModal() {
                                 name='name'
                                 value={loginForm.name || ''}
                                 onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
+                                disabled={authenticationIsLoading}
+                                required
                             />
                         }
                         <TextField
@@ -106,6 +115,8 @@ export function LoginModal() {
                             value={loginForm.email || ''}
                             variant='filled'
                             onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
+                            disabled={authenticationIsLoading}
+                            required
                         />
                         <TextField
                             label='Password'
@@ -113,6 +124,8 @@ export function LoginModal() {
                             name='password'
                             value={loginForm.password || ''}
                             onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
+                            disabled={authenticationIsLoading}
+                            required
                         />
 
                         <Button
@@ -120,6 +133,7 @@ export function LoginModal() {
                             endIcon={<RiLoginBoxLine />}
                             color='success'
                             onClick={handleLoginSubmit}
+                            disabled={!isLoginValid}
                         >
                             {hasUser ? 'Login' : 'Sigin'}
                         </Button>

@@ -9,6 +9,12 @@ import { ChangeEvent, useState } from "react"
 import toast from "react-hot-toast"
 import closeImg from '../../assets/images/close.svg'
 
+// enum target {
+//     orderQuantity = 'orderQuantity',
+//     orderPrice = 'orderPrice',
+//     orderTotal = 'orderTotal'
+// }
+
 interface OrderState {
     orderQuantity: number | ''
     orderPrice: number | ''

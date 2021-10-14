@@ -17,6 +17,8 @@ const reducers = combineReducers({
     authentication: AuthReducer
 })
 
+
+
 //middlewares
 const middlewares = [thunk]
 
