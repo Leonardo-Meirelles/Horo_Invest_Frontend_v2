@@ -38,9 +38,9 @@ export function Header() {
 
                     <SDropdownItem divider />
 
-                    <SDropdownItem header>Profile</SDropdownItem>
+                    <SDropdownItem header>User</SDropdownItem>
+                    <SDropdownItem tag={Link} to='/user/info'>Info</SDropdownItem>
                     <SDropdownItem tag={Link} to='/user/wallet'>Wallet</SDropdownItem>
-                    <SDropdownItem tag={Link} to='/user/stocks'>Info</SDropdownItem>
 
                 </SDropdownMenu>
             </SButtonDropdown>

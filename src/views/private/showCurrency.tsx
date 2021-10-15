@@ -6,6 +6,7 @@ import { RootState } from "../../store"
 import { BuyModal } from "../../components/private/buyModal"
 import { getCurrencies } from "../../store/currencies/action"
 import { CurrencyCard } from "../../components/private/currencies/currencyCards"
+import { Skeleton } from "@mui/material"
 
 export function ShowCurrency(props: RouteComponentProps) {
 
@@ -19,9 +20,21 @@ export function ShowCurrency(props: RouteComponentProps) {
 
     return (
         <Container>
-            {currencies.map(currency => (
-                <CurrencyCard key={currency.id} currencyInfo={currency} />
-            ))}
+            {currencies.length > 0 ? (
+
+                currencies.map(currency => (
+                    <CurrencyCard key={currency.id} currencyInfo={currency} />
+                ))
+            ) :
+                (
+                    <>
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                    </>
+                )
+            }
             <BuyModal />
         </Container>
     )

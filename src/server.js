@@ -6,7 +6,11 @@ export function server() {
             stock: Model,
             crypto: Model,
             currency: Model,
-            order: Model
+            order: Model,
+            ordersStock: Model,
+            ordersCrypto: Model,
+            ordersCurrency: Model
+
         },
 
         seeds(server) {
@@ -69,17 +73,14 @@ export function server() {
                     { id: 27, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
                     { id: 28, currencyName: 'dogcoin', currencyPrice: 4.31, currencyPriceBefore: 4.21 },
                 ],
-                orders: [
+                ordersStocks: [
                     { id: 1, orderName: 'OIBR3', orderPrice: 5.51, orderTotal: 550 },
-                    { id: 2, orderName: 'dogcoin', orderPrice: 57.43, orderTotal: 550 },
-                    { id: 3, orderName: 'ethereum', orderPrice: 2.22, orderTotal: 550 },
-                    { id: 4, orderName: 'PTBR3', orderPrice: 5.00, orderTotal: 550 },
-                    { id: 5, orderName: 'OIBR3', orderPrice: 5.23, orderTotal: 550 },
-                    { id: 6, orderName: 'lalalal', orderPrice: 8.50, orderTotal: 550 },
-                    { id: 7, orderName: 'MGLU3', orderPrice: 8.99, orderTotal: 550 },
-                    { id: 8, orderName: 'dogcoin', orderPrice: 7.90, orderTotal: 550 },
-                    { id: 9, orderName: 'Vivo', orderPrice: 5.55, orderTotal: 550 },
-                    { id: 10, orderName: 'Claro', orderPrice: 6.00, orderTotal: 550 },
+                ],
+                ordersCryptos: [
+                    { id: 1, orderName: 'Bitcoin', orderPrice: 5.51, orderTotal: 550 },
+                ],
+                ordersCurrencies: [
+                    { id: 1, orderName: 'Dolar', orderPrice: 5.51, orderTotal: 550 },
                 ]
             })
         },
@@ -99,12 +100,30 @@ export function server() {
                 return this.schema.all('currency')
             })
 
-            this.get('/orders/:userEmail', (schema, request) => {
-                let attr = request.params.userEmail
-                console.log('🚀 ~ attr', attr)
-                if (attr == 'leonardomeirelles@terra.com.br') {
+            this.get('/:token/orders/stocks/:id/delete', (schema, request) => {
+                let { token, id } = request.params
 
-                    return this.schema.all('order')
+                if (token === ':token' && id === ':1') {
+
+                    return this.schema.all('ordersStock')
+                }
+            })
+
+            this.get('/:token/orders/cryptos/:id/delete', (schema, request) => {
+                let { token, id } = request.params
+
+                if (token === ':token' && id === ':1') {
+
+                    return this.schema.all('ordersCrypto')
+                }
+            })
+
+            this.get('/:token/orders/currencies/:id/delete', (schema, request) => {
+                let { token, id } = request.params
+
+                if (token === ':token' && id === ':1') {
+
+                    return this.schema.all('ordersCurrency')
                 }
             })
 

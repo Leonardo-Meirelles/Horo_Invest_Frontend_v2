@@ -1,5 +1,6 @@
+import { Skeleton } from "@mui/material"
 import { RouteComponentProps } from "@reach/router"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import { BuyModal } from "../../components/private/buyModal"
@@ -19,9 +20,20 @@ export function ShowStocks(props: RouteComponentProps) {
 
     return (
         <Container>
-            {stocks.map((stock) => (
-                <StockCard key={stock.id} stockInfo={stock} />
-            ))}
+            {stocks.length > 0 ? (
+                stocks.map((stock) => (
+                    <StockCard key={stock.id} stockInfo={stock} />
+                ))
+            ) :
+                (
+                    <>
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                    </>
+                )
+            }
             <BuyModal />
         </Container>
     )

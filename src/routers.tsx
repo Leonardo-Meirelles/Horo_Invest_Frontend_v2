@@ -8,16 +8,10 @@ export function Routers() {
   const PrivateRoute = ({ component: Component, ...rest }: any) => {
 
     if (!isAuthenticated()) {
-      console.log('não está auth');
-
+      
       return <Redirect to={'/'} noThrow />
     }
-    //! Explicar essa parte
-    // if (isAuthenticated()) {
-    //   console.log('está auth');
 
-    //   return <Redirect to='/user' noThrow/>
-    // }
     return <Component {...rest} />
   }
 
