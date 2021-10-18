@@ -75,12 +75,18 @@ export function server() {
                 ],
                 ordersStocks: [
                     { id: 1, orderName: 'OIBR3', orderPrice: 5.51, orderTotal: 550 },
+                    { id: 2, orderName: 'OIBR3', orderPrice: 5.51, orderTotal: 550 },
+                    { id: 3, orderName: 'OIBR3', orderPrice: 5.51, orderTotal: 550 },
                 ],
                 ordersCryptos: [
                     { id: 1, orderName: 'Bitcoin', orderPrice: 5.51, orderTotal: 550 },
+                    { id: 2, orderName: 'Bitcoin', orderPrice: 5.51, orderTotal: 550 },
+                    { id: 3, orderName: 'Bitcoin', orderPrice: 5.51, orderTotal: 550 },
                 ],
                 ordersCurrencies: [
                     { id: 1, orderName: 'Dolar', orderPrice: 5.51, orderTotal: 550 },
+                    { id: 2, orderName: 'Dolar', orderPrice: 5.51, orderTotal: 550 },
+                    { id: 3, orderName: 'Dolar', orderPrice: 5.51, orderTotal: 550 },
                 ]
             })
         },
@@ -100,28 +106,28 @@ export function server() {
                 return this.schema.all('currency')
             })
 
-            this.get('/:token/orders/stocks/:id/delete', (schema, request) => {
-                let { token, id } = request.params
+            this.get('/user/orders/stocks/:id/delete', (schema, request) => {
+                let { id } = request.params
 
-                if (token === ':token' && id === ':1') {
+                if (id === ':1') {
 
                     return this.schema.all('ordersStock')
                 }
             })
 
-            this.get('/:token/orders/cryptos/:id/delete', (schema, request) => {
+            this.get('/user/orders/cryptos/:id/delete', (schema, request) => {
                 let { token, id } = request.params
 
-                if (token === ':token' && id === ':1') {
+                if (id === ':1') {
 
                     return this.schema.all('ordersCrypto')
                 }
             })
 
-            this.get('/:token/orders/currencies/:id/delete', (schema, request) => {
+            this.get('/user/orders/currencies/:id/delete', (schema, request) => {
                 let { token, id } = request.params
 
-                if (token === ':token' && id === ':1') {
+                if (id === ':1') {
 
                     return this.schema.all('ordersCurrency')
                 }

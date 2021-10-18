@@ -180,7 +180,12 @@ export function BuyModal() {
                         </InputBox>
 
                         <ButtonContent>
-                            <Button variant="contained" color='success' size="large">
+                            <Button
+                                variant="contained"
+                                color='success'
+                                size="large"
+                                
+                            >
                                 Send Order
                             </Button>
                         </ButtonContent>

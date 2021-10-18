@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux"
 import { toggleModal } from "../../../store/openModal/action"
 import { Skeleton, ToggleButton, ToggleButtonGroup } from "@mui/material"
 import { useEffect, useState } from "react"
-import { getUserOrders } from "../../../services/userOrdersService"
+import { getUserOrdersService } from "../../../services/userService"
+import { deleteOrder } from "../../../store/deleteOrderModal/action"
 
 interface Order {
     id: string
@@ -31,23 +32,22 @@ export function OrdersList() {
         const getUserOrdersByAsset = async () => {
 
             let data = {
-                token: 'token',
                 assetName: alignment,
                 assetId: '1'
             }
             switch (alignment) {
                 case 'stocks':
-                    const ordersStocks = await (await getUserOrders(data)).data.ordersStocks
+                    const ordersStocks = await (await getUserOrdersService(data)).data.ordersStocks
                     setOrderData(ordersStocks)
                     setLoading(false)
                     break
                 case 'currencies':
-                    const ordersCurrency = await (await getUserOrders(data)).data.ordersCurrencies
+                    const ordersCurrency = await (await getUserOrdersService(data)).data.ordersCurrencies
                     setOrderData(ordersCurrency)
                     setLoading(false)
                     break
                 case 'cryptos':
-                    const ordersCrypto = await (await getUserOrders(data)).data.ordersCryptos
+                    const ordersCrypto = await (await getUserOrdersService(data)).data.ordersCryptos
                     setOrderData(ordersCrypto)
                     setLoading(false)
                     break
@@ -86,7 +86,7 @@ export function OrdersList() {
                     </thead>
                     <tbody>
                         {orderData?.map((order: Order, index: number) => (
-                            <RowItem key={index} order={order} />
+                            <RowItem key={index} order={order} asset={alignment} />
                         ))}
                     </tbody>
                 </STable>
@@ -104,11 +104,15 @@ export function OrdersList() {
     )
 }
 
-const RowItem = ({ order }: any) => {
+const RowItem = ({ order, asset }: any) => {
 
     const dispatch = useDispatch()
-    const handleOpenModal = () => dispatch(toggleModal())
-
+    const handleDeleteOrder = (event: React.MouseEvent<HTMLButtonElement>) => {
+        const id = event.currentTarget.value
+        dispatch(toggleModal())
+        dispatch(deleteOrder(id, asset))
+    }
+    
     return (
         <tr>
             <td>{order.id}</td>
@@ -118,8 +122,8 @@ const RowItem = ({ order }: any) => {
             <td>00/00/0000</td>
             <td>
                 <Button
-                    color="danger"
-                    onClick={handleOpenModal}>
+                    value={order.id}
+                    onClick={(event: React.MouseEvent<HTMLButtonElement>) => handleDeleteOrder(event)}>
                     <AiOutlineDelete />
                 </Button>
             </td>

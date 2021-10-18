@@ -4,37 +4,66 @@ import styled from 'styled-components'
 import { RootState } from '../../../store'
 import { toggleModal } from '../../../store/openModal/action'
 import closeImg from '../../../assets/images/close.svg'
+import { deleteUserOrderByIdService } from '../../../services/userService'
+import toast from 'react-hot-toast'
 
-export function DeleteOrderModal (props: any) {
+export function DeleteOrderModal(props: any) {
 
     const dispatch = useDispatch()
     const handleClose = () => dispatch(toggleModal())
 
     const modalState = useSelector((state: RootState) => state.modal.open)
+    const orderIdToDelete = useSelector((state: RootState) => state.deleteOrder.id)
+    const orderAssetToDelete = useSelector((state: RootState) => state.deleteOrder.asset)
+
+    const handleDeleteOrder = () => {
+        const data = {
+            assetName: orderAssetToDelete,
+            assetId: orderIdToDelete
+        }
+        try {
+            deleteUserOrderByIdService(data)
+                .then(() => toast.success('Order deleted successfully!'))
+
+            toast.success('Order deleted successfully!', {
+                position: 'top-right'
+            })
+
+        } catch {
+            toast.success('Something went wrong with your request')
+        }
+
+    }
 
     return (
-            <Modal
-                isOpen={modalState}
-                modalTransition={{ timeout: 500 }}
-                backdropTransition={{ timeout: 1000 }}
-                toggle={handleClose}
-            >
-                <CloseButton onClick={handleClose}>
-                    <img src={closeImg} alt="Close modal" />
-                </CloseButton>
-                <ModalHeader>
-                    Please confirm order cancelation!
-                </ModalHeader>
+        <Modal
+            isOpen={modalState}
+            modalTransition={{ timeout: 500 }}
+            backdropTransition={{ timeout: 800 }}
+            toggle={handleClose}
+        >
+            <CloseButton onClick={handleClose}>
+                <img src={closeImg} alt="Close modal" />
+            </CloseButton>
+            <ModalHeader>
+                Please confirm order cancelation!
+            </ModalHeader>
 
-                <ModalBody>
-                    If you proceed, there is no way of turning back and your order will be completly deleted!
-                </ModalBody>
+            <ModalBody>
+                If you proceed, there is no way of turning back and your order will be completely deleted!
+            </ModalBody>
 
-                <SModalFooter>
-                    <Button color="success" >Keep Order</Button>
-                    <Button color="danger" >Delete Order</Button>
-                </SModalFooter>
-            </Modal>
+            <SModalFooter>
+                <Button
+                    color="success"
+                    onClick={handleClose}
+                >Keep Order</Button>
+                <Button
+                    color="danger"
+                    onClick={() => handleDeleteOrder()}
+                >Delete Order</Button>
+            </SModalFooter>
+        </Modal>
     )
 }
 

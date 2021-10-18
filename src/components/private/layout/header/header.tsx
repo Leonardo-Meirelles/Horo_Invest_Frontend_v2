@@ -26,6 +26,7 @@ export function Header() {
             <div>
                 <h4>Hello, {user.name}!</h4>
             </div>
+
             <SButtonDropdown direction="down" isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle caret color="secondary" size="lg">
                     Menu
@@ -39,8 +40,8 @@ export function Header() {
                     <SDropdownItem divider />
 
                     <SDropdownItem header>User</SDropdownItem>
-                    <SDropdownItem tag={Link} to='/user/info'>Info</SDropdownItem>
                     <SDropdownItem tag={Link} to='/user/wallet'>Wallet</SDropdownItem>
+                    <SDropdownItem tag={Link} to='/user/info'>Profile</SDropdownItem>
 
                 </SDropdownMenu>
             </SButtonDropdown>
@@ -57,7 +58,7 @@ export function Header() {
 
 const Container = styled.header`
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items:center;
     background: var(--black);
     padding: 0.5rem 1.5rem;
@@ -69,7 +70,7 @@ const Container = styled.header`
 
 const SButtonDropdown = styled(ButtonDropdown)`
     width: 20rem;    
-
+    margin-right: 2.25rem;
 `
 
 const SDropdownMenu = styled(DropdownMenu)`
