@@ -2,15 +2,15 @@ export const enumRoles = (role: number) => {
     const mapRole: any = {
 
         1: {
-            type: 'Admin',
+            type: 'User',
             code: 1,
-            route: '/admin'
+            route: '/user'
         },
 
         2: {
-            type: 'User',
+            type: 'Admin',
             code: 2,
-            route: '/user'
+            route: '/admin'
         }
     }
 

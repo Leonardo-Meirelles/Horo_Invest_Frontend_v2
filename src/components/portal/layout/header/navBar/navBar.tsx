@@ -34,7 +34,6 @@ export function NavBar() {
 
       <ButtonGroup>
         <SButton onClick={changeStoreModalState}>Entrar</SButton>
-        <SButton>Sair</SButton>
       </ButtonGroup>
     </Container>
   )

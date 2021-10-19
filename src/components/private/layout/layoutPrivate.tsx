@@ -1,8 +1,9 @@
+import { RouteComponentProps } from '@reach/router'
 import styled from 'styled-components'
 import { Footer } from './footer/footer'
 import { Header } from './header/header'
 
-interface LayoutPrivateProps {
+interface LayoutPrivateProps extends RouteComponentProps {
     children: React.ReactNode;
 }
 

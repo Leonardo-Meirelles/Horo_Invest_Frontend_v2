@@ -19,7 +19,7 @@ export function CurrencyCard({ currencyInfo }: CurrencyCardProps) {
 
     const { id, currencyName, currencyPrice, currencyPriceBefore } = currencyInfo
 
-    const isCheaper = currencyPrice < currencyPriceBefore ? true : false
+    const isCheaper = currencyPrice < currencyPriceBefore ? 'true' : 'false'
 
     const dispatch = useDispatch()
     
@@ -42,7 +42,7 @@ export function CurrencyCard({ currencyInfo }: CurrencyCardProps) {
 }
 
 interface SPaperProps {
-    isCheaper: boolean
+    isCheaper: 'true' | 'false'
 }
 
 const SPaper = styled(Paper)<SPaperProps>`
@@ -50,7 +50,7 @@ const SPaper = styled(Paper)<SPaperProps>`
     height: 15rem;
     text-align: center;
     border: 2px solid;
-    border-color: ${(props) => props.isCheaper === true ? 'red' : 'green'};
+    border-color: ${(props) => props.isCheaper === 'true' ? 'red' : 'green'};
 
     &:hover {
         

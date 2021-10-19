@@ -19,7 +19,7 @@ export function CryptoCard({ cryptoInfo }: CryptoCardProps) {
 
     const { id, cryptoName, cryptoPrice, cryptoPriceBefore } = cryptoInfo
 
-    const isCheaper = cryptoPrice < cryptoPriceBefore ? true : false
+    const isCheaper = cryptoPrice < cryptoPriceBefore ? 'true' : 'false'
 
     const dispatch = useDispatch()
     
@@ -29,7 +29,7 @@ export function CryptoCard({ cryptoInfo }: CryptoCardProps) {
     }
 
     return (
-        <SPaper elevation={24} isCheaper={isCheaper}>
+        <SPaper elevation={24} ischeaper={isCheaper}>
             <Content>
                 <h2>{cryptoName}</h2>
                 <hr />
@@ -42,7 +42,7 @@ export function CryptoCard({ cryptoInfo }: CryptoCardProps) {
 }
 
 interface SPaperProps {
-    isCheaper: boolean
+    ischeaper: 'true' | 'false'
 }
 
 const SPaper = styled(Paper)<SPaperProps>`
@@ -50,7 +50,7 @@ const SPaper = styled(Paper)<SPaperProps>`
     height: 15rem;
     text-align: center;
     border: 2px solid;
-    border-color: ${(props) => props.isCheaper === true ? 'red' : 'green'};
+    border-color: ${(props) => props.ischeaper === 'true' ? 'red' : 'green'};
 
     &:hover {
         

@@ -6,6 +6,7 @@ import { getCryptos } from "../../store/cryptos/action"
 import { RootState } from "../../store"
 import { CryptoCard } from "../../components/private/crypto/cryptosCards"
 import { BuyModal } from "../../components/private/buyModal"
+import { Skeleton } from "@mui/material"
 
 export function ShowCripto(props: RouteComponentProps) {
 
@@ -19,9 +20,20 @@ export function ShowCripto(props: RouteComponentProps) {
 
     return (
         <Container>
-            {cryptos.map(crypto => (
-                <CryptoCard key={crypto.id} cryptoInfo={crypto} />
-            ))}
+            {cryptos.length > 0 ? (
+                cryptos.map(crypto => (
+                    <CryptoCard key={crypto.id} cryptoInfo={crypto} />
+                ))
+            ) :
+                (
+                    <>
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                        <Skeleton variant="rectangular" width={200} height={200} />
+                    </>
+                )
+            }
             <BuyModal />
         </Container>
     )

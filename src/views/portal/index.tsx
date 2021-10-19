@@ -13,10 +13,10 @@ export function Portal(props: RouteComponentProps) {
             <LayoutPortal>
                 <Router>
                     <Home path='/' />
-                    <Stocks exact path='/stocks' />
-                    <Currency exact path='/currency' />
-                    <Cripto exact path='/cripto' />
-                    <About exact path='/about' />
+                    <Stocks  path='/stocks' />
+                    <Currency  path='/currency' />
+                    <Cripto  path='/cripto' />
+                    <About  path='/about' />
                 </Router>
                 <LoginModal />
             </LayoutPortal>

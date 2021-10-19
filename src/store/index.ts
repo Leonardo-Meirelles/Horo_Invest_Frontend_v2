@@ -6,6 +6,7 @@ import StocksReducer from './stocks/reducer'
 import CryptosReducer from './cryptos/reducer'
 import CurrencyReducer from './currencies/reducer'
 import AuthReducer from './authentication/reducer'
+import DeleteOrderReducer from './deleteOrderModal/reducer'
 import thunk, { ThunkAction } from 'redux-thunk'
 
 const reducers = combineReducers({
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     stocks: StocksReducer,
     cryptos: CryptosReducer,
     currencies: CurrencyReducer,
-    authentication: AuthReducer
+    authentication: AuthReducer,
+    deleteOrder: DeleteOrderReducer
 })
 
 //middlewares
