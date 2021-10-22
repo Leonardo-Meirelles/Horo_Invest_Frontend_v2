@@ -68,7 +68,7 @@ export function OrdersList() {
                 >
                     <ToggleButton value="stocks">Stocks</ToggleButton>
                     <ToggleButton value="currencies">Currency</ToggleButton>
-                    <ToggleButton value="cryptos">Criptocurrency</ToggleButton>
+                    <ToggleButton value="cryptos">Cryptocurrency</ToggleButton>
                 </ToggleButtonGroup>
             </ButtonContainer>
 

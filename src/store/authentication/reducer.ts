@@ -1,4 +1,4 @@
-import jwt, {JwtPayload} from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import { getTokenLocalStorage } from "../../config/storage"
 import { enumRoles } from '../../utils/enumRoles'
 

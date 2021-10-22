@@ -122,8 +122,8 @@ export function ChangeUserInfo() {
 const SCard = styled(Card)`
     margin: 2rem; 
     text-align: center;
-    width: 50rem;
-    height: 50rem;
+    width: 50%;
+    height: 60vh;
 `
 
 const SCardContent = styled(CardContent)`

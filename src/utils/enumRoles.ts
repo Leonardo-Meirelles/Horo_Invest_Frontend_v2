@@ -1,5 +1,5 @@
 export const enumRoles = (role: number) => {
-    const mapRole: any = {
+    const mapRole:any = {
 
         1: {
             type: 'User',
@@ -15,6 +15,5 @@ export const enumRoles = (role: number) => {
     }
 
     return mapRole[role]
-
 }
 
