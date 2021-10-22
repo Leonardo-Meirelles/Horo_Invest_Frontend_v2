@@ -145,7 +145,17 @@ export function server() {
                         token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiTGVvIiwiZW1haWwiOiJsZW9uYXJkb21laXJlbGxlc0B0ZXJyYS5jb20uYnIiLCJwYXNzd29yZCI6IjEyMzQ1IiwidXNlcl90eXBlIjoxLCJzdGF0dXMiOnRydWV9.uqYVX_kvDZMJXud1j-hRe2fTvp6PVuv2j0xVHrDgCgw'
                     }
 
-                } else {
+                } if (
+                    attr.email == 'giulia@gmail.com'
+                    &&
+                    attr.password == 54321
+                ) {
+                    return {
+                        type: 'bearer',
+                        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJuYW1lIjoiR2l1bGlhIiwiZW1haWwiOiJnaXVsaWFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1NDMyMSIsInVzZXJfdHlwZSI6Miwic3RhdHVzIjp0cnVlfQ.miJKvIrRaRtwglCe8FrzvanZm2c1gw_wk2x228zGF5Q'
+                    }
+                }
+                else {
                     return new Response(
                         400,
                         {},

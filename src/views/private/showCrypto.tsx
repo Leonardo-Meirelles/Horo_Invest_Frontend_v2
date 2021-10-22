@@ -8,7 +8,7 @@ import { CryptoCard } from "../../components/private/crypto/cryptosCards"
 import { BuyModal } from "../../components/private/buyModal"
 import { Skeleton } from "@mui/material"
 
-export function ShowCripto(props: RouteComponentProps) {
+export function ShowCrypto(props: RouteComponentProps) {
 
     const dispatch = useDispatch()
 

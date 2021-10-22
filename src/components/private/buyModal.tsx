@@ -181,7 +181,7 @@ export function BuyModal() {
 
                         <ButtonContent>
                             <Button
-                                variant="contained"
+                                variant="outlined"
                                 color='success'
                                 size="large"
                                 

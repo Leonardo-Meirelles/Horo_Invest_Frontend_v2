@@ -12,15 +12,15 @@ export function UserInfo() {
         <SCard>
             <SCardContent>
                 <Typography sx={{ fontSize: 18 }} color="WindowText" gutterBottom>
-                    Name: {userName}
+                    <strong>Name:</strong> {userName}
                 </Typography>
 
                 <Typography sx={{ fontSize: 18 }} color="WindowText" gutterBottom>
-                    Email: {userEmail}
+                <strong>Email:</strong> {userEmail}
                 </Typography>
 
                 <Typography sx={{ fontSize: 18 }} color="WindowText" gutterBottom>
-                    User since: 00/00/0000
+                <strong>User since:</strong> 00/00/0000
                 </Typography>
             </SCardContent>
         </SCard>

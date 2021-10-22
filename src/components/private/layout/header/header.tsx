@@ -5,6 +5,7 @@ import { ButtonDropdown, DropdownToggle, DropdownItem, DropdownMenu, Button } fr
 import styled from "styled-components"
 import { logoutAuthentication } from "../../../../store/authentication/action"
 import { RootState } from "../../../../store/index"
+import { FaCog } from "react-icons/fa"
 
 export function Header() {
 
@@ -14,7 +15,8 @@ export function Header() {
 
     const toggle = () => setOpen(!dropdownOpen)
 
-    const user: any = useSelector((state: RootState) => state.authentication?.user)  
+    const user: any = useSelector((state: RootState) => state.authentication?.user)
+    const userRoute = useSelector((state: RootState) => state.authentication.type?.route)
 
     const handleLogout = () => {
 
@@ -33,15 +35,25 @@ export function Header() {
                 </DropdownToggle>
                 <SDropdownMenu>
                     <SDropdownItem header>Market</SDropdownItem>
-                    <SDropdownItem tag={Link} to='/user/stocks'>Stocks</SDropdownItem>
-                    <SDropdownItem tag={Link} to='/user/currencies'>Currency</SDropdownItem>
-                    <SDropdownItem tag={Link} to='/user/cripto'>Criptocurrency</SDropdownItem>
+                    <SDropdownItem tag={Link} to={`${userRoute}/`}>Stocks</SDropdownItem>
+                    <SDropdownItem tag={Link} to={`${userRoute}/currencies`}>Currency</SDropdownItem>
+                    <SDropdownItem tag={Link} to={`${userRoute}/crypto`}>Cryptocurrency</SDropdownItem>
 
                     <SDropdownItem divider />
 
-                    <SDropdownItem header>User</SDropdownItem>
-                    <SDropdownItem tag={Link} to='/user/wallet'>Wallet</SDropdownItem>
-                    <SDropdownItem tag={Link} to='/user/info'>Profile</SDropdownItem>
+                    {userRoute == '/user' ? (
+                        <>
+                            <SDropdownItem header>User</SDropdownItem>
+                            <SDropdownItem tag={Link} to={`${userRoute}/wallet`}>Wallet</SDropdownItem>
+                            <SDropdownItem tag={Link} to={`${userRoute}/info`}>Profile</SDropdownItem>
+                        </>
+                    ) :
+                        (
+                            <>
+                                <SDropdownItem header>Restricted</SDropdownItem>
+                                <SDropdownItem tag={Link} to={`${userRoute}/admin`}>Admin <FaCog/></SDropdownItem>
+                            </>
+                        )}
 
                 </SDropdownMenu>
             </SButtonDropdown>
@@ -75,10 +87,10 @@ const SButtonDropdown = styled(ButtonDropdown)`
 
 const SDropdownMenu = styled(DropdownMenu)`
     width: 100%;
-    height: 25rem;
 `
 
 const SDropdownItem = styled(DropdownItem)`
     font-size: 1.5rem;
     margin-top: 0.5rem;
+    text-align: center;
 `
