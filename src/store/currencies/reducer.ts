@@ -12,6 +12,7 @@ type Currencies = {
     currencyName: string
     currencyPrice: number
     currencyPriceBefore: number
+    status: boolean
 }[]
 
 const INITIAL_STATE: InitialStateCurrencies = {

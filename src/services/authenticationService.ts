@@ -9,5 +9,9 @@ interface AuthLoginService {
 }
 
 export const authenticationLoginService = async (data: LoginForm): Promise<AuthLoginService> => (
-    await http.post('/login', data)
+    await http.post("/login", data)
+)
+
+export const authenticationRegisterService = async (data: LoginForm): Promise<AuthLoginService> => (
+    await http.post('/register', data)
 )

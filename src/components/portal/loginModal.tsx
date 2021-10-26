@@ -3,11 +3,11 @@ import { Backdrop, Box, Button, Fade, Modal, TextField } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleModal } from '../../store/openModal/action'
 import type { RootState } from '../../store/index'
-import { ChangeEvent, useState } from 'react'
+import { KeyboardEvent, ChangeEvent, useState } from 'react'
 import { FiUserPlus, FiUserCheck } from "react-icons/fi"
 import { RiLoginBoxLine } from "react-icons/ri"
 import closeImg from '../../assets/images/close.svg'
-import { loginAuthentication } from '../../store/authentication/action'
+import { loginAuthentication, registerAuthentication } from '../../store/authentication/action'
 
 export interface LoginForm {
     name?: string
@@ -47,12 +47,31 @@ export function LoginModal() {
     const handleLoginSubmit = () => {
 
         dispatch(loginAuthentication(loginForm))
-        dispatch(toggleModal())
     }
+
+    const handleRegisterSubmit = () => {
+        dispatch(registerAuthentication(loginForm))
+        setLoginForm({
+            email: '',
+            password: ''
+        })
+        setHasUser(true)
+    }
+
+    const handleEnterKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
+
+        if (hasUser) {
+            return event.code === 'Enter' ? handleLoginSubmit() : null
+        } else {
+            return event.code === 'Enter' ? handleRegisterSubmit() : null
+        }
+
+    }
+
 
     const authenticationIsLoading = useSelector((state: RootState) => state.authentication.loading)
 
-    const isLoginValid = 
+    const isLoginValid =
         Object.keys(loginForm).length > 0 &&
         loginForm?.email.length > 0 &&
         loginForm?.password.length > 0
@@ -125,6 +144,8 @@ export function LoginModal() {
                             value={loginForm.password || ''}
                             onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
                             disabled={authenticationIsLoading}
+                            type='password'
+                            onKeyPress={(event: KeyboardEvent<HTMLDivElement>) => handleEnterKeyPress(event)}
                             required
                         />
 
@@ -132,7 +153,7 @@ export function LoginModal() {
                             variant='outlined'
                             endIcon={<RiLoginBoxLine />}
                             color='success'
-                            onClick={handleLoginSubmit}
+                            onClick={hasUser ? handleLoginSubmit : handleRegisterSubmit}
                             disabled={!isLoginValid}
                         >
                             {hasUser ? 'Login' : 'Sigin'}

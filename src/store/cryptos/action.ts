@@ -8,7 +8,8 @@ export const getCryptos = (): AppThunk => {
         const cryptos = await getCryptosService()
 
         dispatch({type: 'GET_CRYPTOS', data: cryptos.map(item => ({
-            ...item, id: Number(item.id)
+            ...item,
+            id: Number(item.id),
         }))})
     }
 }

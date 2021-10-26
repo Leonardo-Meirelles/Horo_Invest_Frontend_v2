@@ -8,7 +8,9 @@ export const getCurrencies = (): AppThunk => {
         const currencies = await getCurrenciesService()
 
         dispatch({type: 'GET_CURRENCIES', data: currencies.map(item => ({
-            ...item, id: Number(item.id)
+            id: Number(item.id),
+            currencyName: item.currency_name,
+            status: item.status
         }))})
     }
 }

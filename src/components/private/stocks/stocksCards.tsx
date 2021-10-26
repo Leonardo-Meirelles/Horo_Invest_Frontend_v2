@@ -19,7 +19,7 @@ export function StockCard({ stockInfo }: StockCardProps) {
 
     const dispatch = useDispatch()
     const handleOpen = () => {
-        dispatch(setModalAssets(id, stockName, stockPrice, 'Stocks'))
+        dispatch(setModalAssets(id, stockName, stockPrice, 'Stocks', 'R$'))
         dispatch(toggleModal())
     }
 

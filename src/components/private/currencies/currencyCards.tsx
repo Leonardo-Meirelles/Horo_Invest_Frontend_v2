@@ -24,7 +24,7 @@ export function CurrencyCard({ currencyInfo }: CurrencyCardProps) {
     const dispatch = useDispatch()
     
     const handleOpen = () => {
-        dispatch(setModalAssets(id, currencyName, currencyPrice, 'Currency'))
+        dispatch(setModalAssets(id, currencyName, currencyPrice, 'Currency', 'USD'))
         dispatch(toggleModal())
     }
 

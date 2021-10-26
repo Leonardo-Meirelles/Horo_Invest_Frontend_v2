@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { getTokenLocalStorage } from './storage'
 
-const urlDefault = 'https://localhost:3000/api'
+const urlDefault = 'http://localhost:3333'
 
 export const http = axios.create({
     baseURL: urlDefault

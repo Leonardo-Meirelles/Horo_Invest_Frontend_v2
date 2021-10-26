@@ -12,6 +12,7 @@ type Asset = {
     assetName: string
     assetPrice: number
     assetType: string
+    assetCurrency: string
 }
 
 const INITIAL_STATE: InitialStateAssets = {
@@ -19,7 +20,8 @@ const INITIAL_STATE: InitialStateAssets = {
         assetId: 0,
         assetName: '',
         assetPrice: 0,
-        assetType: ''
+        assetType: '',
+        assetCurrency: ''
     }
 }
 

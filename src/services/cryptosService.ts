@@ -5,10 +5,11 @@ interface GetCryptoPromise {
     cryptoName: string
     cryptoPrice: number
     cryptoPriceBefore: number
+    status: boolean
 }
 
 const pathCryptos = '/cryptos'
 
 export const getCryptosService = async (): Promise<GetCryptoPromise[]> => (
     await http.get(pathCryptos)
-).data.cryptos || []
+).data || []
