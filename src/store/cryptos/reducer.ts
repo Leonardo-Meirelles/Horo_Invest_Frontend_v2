@@ -12,6 +12,7 @@ type Cryptos = {
     cryptoName: string
     cryptoPrice: number
     cryptoPriceBefore: number
+    status: boolean
 }[]
 
 const INITIAL_STATE: InitialStateCryptos = {

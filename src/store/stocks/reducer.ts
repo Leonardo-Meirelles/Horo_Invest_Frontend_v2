@@ -12,6 +12,7 @@ type Stocks = {
     stockName: string
     stockPrice: number
     stockPriceBefore: number
+    status: boolean
 }[]
 
 const INITIAL_STATE: InitialStateStocks = {

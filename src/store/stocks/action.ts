@@ -8,7 +8,8 @@ export const getStocks = (): AppThunk => {
         const stocks = await getStocksService()        
 
         dispatch({type: 'GET_STOCKS', data: stocks.map(item => ({
-            ...item, id: Number(item.id)
+            ...item,
+            id: Number(item.id)
         }))})
     }
 }

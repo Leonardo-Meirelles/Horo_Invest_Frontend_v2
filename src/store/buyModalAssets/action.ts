@@ -4,7 +4,8 @@ export const setModalAssets = (
     assetId: number,
     assetName: string,
     assetPrice: number,
-    assetType: string): AppThunk => {
+    assetType: string,
+    assetCurrency: string): AppThunk => {
 
     return async (dispatch: AppDispatch) => {
 
@@ -12,7 +13,8 @@ export const setModalAssets = (
             assetId,
             assetName,
             assetPrice,
-            assetType
+            assetType,
+            assetCurrency
         }
 
         dispatch({ type: 'SET_ASSETS', data: asset })

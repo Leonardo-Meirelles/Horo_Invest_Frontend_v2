@@ -121,7 +121,7 @@ export function BuyModal() {
                             </Typography>
 
                             <Typography variant="h5" >
-                                R$ {modalAssets.assetPrice}
+                            {modalAssets.assetCurrency} {modalAssets.assetPrice}
                             </Typography>
 
                         </TextContent>
