@@ -32,7 +32,8 @@ export function StockCard({ stockInfo }: StockCardProps) {
             <Content>
                 <h2>{stockName}</h2>
                 <hr />
-                <h2>R$ {stockPrice}</h2>
+                <h2>Today: R$ {stockPrice}</h2>
+                <h2>Yesterday: R$ {stockPriceBefore}</h2>
                 <hr />
                 <button type='button' onClick={handleOpen}><AiOutlinePlusSquare /> <br /> Buy now </button>
             </Content>
@@ -66,7 +67,7 @@ const Content = styled.div`
     padding: 1rem;
 
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.20rem;
     }
         
     button {
