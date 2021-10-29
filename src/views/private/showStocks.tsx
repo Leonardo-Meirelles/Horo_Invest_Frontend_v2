@@ -37,12 +37,11 @@ export function ShowStocks(props: RouteComponentProps) {
             <BuyModal />
         </Container>
     )
-}
+};
 
 const Container = styled.div`
+    display: flex;
     justify-content: center;
-    display: grid;
-    grid-gap: 2rem;
-    grid-template-columns: repeat(4, 1fr);
+    flex-wrap: wrap;
     margin: 2rem;
 `

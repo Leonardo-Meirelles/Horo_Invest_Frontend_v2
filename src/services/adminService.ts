@@ -1,8 +1,8 @@
 import { http } from '../config/http'
 
-export const getAllUsersService = async (data: any) => (
+export const getAllUsersService = async () => (
 
-    await http.get(`/`)
+    await http.get(`/users`)
 )
 
 export const addAssetToDataBaseService = async (data: any) => (

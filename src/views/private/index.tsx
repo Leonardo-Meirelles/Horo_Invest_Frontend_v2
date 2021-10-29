@@ -17,9 +17,9 @@ export function Private(props: RouteComponentProps) {
         { component: ShowStocks, path: '/', authorization: [1, 2] },
         { component: ShowCurrency, path: '/currencies', authorization: [1, 2] },
         { component: ShowCrypto, path: '/crypto', authorization: [1, 2] },
-        { component: UserWallet, path: '/wallet', authorization: [1] },
-        { component: UserProfile, path: '/info', authorization: [1] },
-        { component: Admin, path: '/admin', authorization: [2] }
+        { component: UserWallet, path: '/wallet', authorization: [2] },
+        { component: UserProfile, path: '/info', authorization: [2] },
+        { component: Admin, path: '/admin', authorization: [1] }
     ]
 
     const authorizedRoutesByUserType = componentsToMount.filter((route) => {

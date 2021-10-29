@@ -1,60 +1,84 @@
-import { Table } from "reactstrap"
-import styled from "styled-components"
-import { AiOutlineDelete } from "react-icons/ai"
-import { useDispatch } from "react-redux"
-import { toggleModal } from "../../../store/openModal/action"
-import { Skeleton, ToggleButton, ToggleButtonGroup } from "@mui/material"
-import { useEffect, useState } from "react"
-import { getUserOrdersService } from "../../../services/userService"
-import { deleteOrder } from "../../../store/deleteOrderModal/action"
+import { Table } from "reactstrap";
+import styled from "styled-components";
+import { AiOutlineDelete } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { toggleModal } from "../../../store/openModal/action";
+import { Skeleton, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { useCallback, useEffect, useState } from "react";
+import { getUserCryptosOrdersService } from "../../../services/userService";
+import { getUserStocksOrdersService } from "../../../services/userService";
+import { deleteOrder } from "../../../store/deleteOrderModal/action";
 
 interface Order {
-    id: string
+    id: number
     orderName: string
-    orderPrice: number
-    orderTotal: number
-}
+    orderPrice: string
+    orderQuantity: string
+    orderDate: string
+};
 
 export function OrdersList() {
 
-    const [alignment, setAlignment] = useState('stocks')
-    const [orderData, setOrderData] = useState<Order[]>()
-    const [loading, setLoading] = useState(true)
+    const [alignment, setAlignment] = useState('stocks');
+    const [orderData, setOrderData] = useState<Order[]>();
+    const [loading, setLoading] = useState(true);
+
+    const [, updateState] = useState<any>();
+    const forceUpdate = useCallback(() => updateState({}), []);
 
     const handleChangeChoiceButtons = (
         event: React.MouseEvent<HTMLElement>,
         newAlignment: string,
     ) => {
         setAlignment(newAlignment)
-    }
+    };
 
     useEffect(() => {
         const getUserOrdersByAsset = async () => {
 
             let data = {
-                assetName: alignment,
-                assetId: '1'
-            }
+                assetName: alignment
+            };
             switch (alignment) {
                 case 'stocks':
-                    const ordersStocks = await (await getUserOrdersService(data)).data.ordersStocks
+                    const ordersStocksReturn = await (await getUserStocksOrdersService(data)).data
+                    const ordersStocks = ordersStocksReturn.map((order: any) => {
+                        const data = {
+                            id: order.id,
+                            orderName: order.stock_name,
+                            orderPrice: 'R$ ' + order.stock_price,
+                            orderQuantity: order.stock_quantity,
+                            orderDate: order.created_at
+                        }
+                        return data
+                    })
                     setOrderData(ordersStocks)
                     setLoading(false)
                     break
-                case 'currencies':
-                    const ordersCurrency = await (await getUserOrdersService(data)).data.ordersCurrencies
-                    setOrderData(ordersCurrency)
-                    setLoading(false)
-                    break
+                // case 'currencies':
+                //     const ordersCurrency = await (await getUserOrdersService()).data.ordersCurrencies
+                //     setOrderData(ordersCurrency)
+                //     setLoading(false)
+                //     break
                 case 'cryptos':
-                    const ordersCrypto = await (await getUserOrdersService(data)).data.ordersCryptos
-                    setOrderData(ordersCrypto)
+                    const ordersCryptoReturn = await (await getUserCryptosOrdersService(data)).data
+                    const ordersCryptos = ordersCryptoReturn.map((order: any) => {
+                        const data = {
+                            id: order.id,
+                            orderName: order.crypto_name,
+                            orderPrice: 'USD ' + order.crypto_price,
+                            orderQuantity: order.crypto_quantity,
+                            orderDate: order.created_at
+                        }
+                        return data
+                    })
+                    setOrderData(ordersCryptos)
                     setLoading(false)
                     break
-            }
-        }
+            };
+        };
         getUserOrdersByAsset()
-    }, [alignment])
+    }, [alignment]);
 
 
     return (
@@ -67,7 +91,7 @@ export function OrdersList() {
                     onChange={handleChangeChoiceButtons}
                 >
                     <ToggleButton value="stocks">Stocks</ToggleButton>
-                    <ToggleButton value="currencies">Currency</ToggleButton>
+                    {/* <ToggleButton value="currencies">Currency</ToggleButton> */}
                     <ToggleButton value="cryptos">Cryptocurrency</ToggleButton>
                 </ToggleButtonGroup>
             </ButtonContainer>
@@ -79,7 +103,7 @@ export function OrdersList() {
                             <th>ID</th>
                             <th>Product</th>
                             <th>Price</th>
-                            <th>Total</th>
+                            <th>Quantity</th>
                             <th>Order date</th>
                             <th>Cancel Order</th>
                         </tr>
@@ -112,14 +136,14 @@ const RowItem = ({ order, asset }: any) => {
         dispatch(toggleModal())
         dispatch(deleteOrder(id, asset))
     }
-    
+
     return (
         <tr>
             <td>{order.id}</td>
             <td>{order.orderName}</td>
             <td>{order.orderPrice}</td>
-            <td>{order.orderTotal}</td>
-            <td>00/00/0000</td>
+            <td>{order.orderQuantity}</td>
+            <td>{order.orderDate}</td>
             <td>
                 <Button
                     value={order.id}
