@@ -4,20 +4,42 @@ import styled from "styled-components"
 import { FaUserPlus, FaUserTimes, FaUserCog } from "react-icons/fa"
 import { useDispatch } from "react-redux"
 import { toggleModal } from "../../../store/openModal/action"
+import { getAllUsersService } from "../../../services/adminService"
+import { useEffect, useState } from "react"
 
 export function UsersTableList(props: RouteComponentProps) {
+
+    const [userData, setUserData] = useState<any>([])
+    console.log('🚀 ~ userData', userData)
 
     const dispatch = useDispatch()
 
     const handleClickUserType = (event: any) => {
-        const x = event.target.value
-        console.log('🚀 ~ x', x)
+        // const x = event.target.value
+
         dispatch(toggleModal())
     }
 
     const handleClickUserStatus = () => {
         dispatch(toggleModal())
     }
+
+    useEffect(() => {
+
+        const getUsers = async () => {
+
+            const users = await (await getAllUsersService()).data
+
+            setUserData(users)
+        }
+        getUsers()
+
+    }, [])
+
+
+
+
+
 
     return (
         <Container>
@@ -34,24 +56,26 @@ export function UsersTableList(props: RouteComponentProps) {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>{1}</td>
-                        <td>{'Leonardo'}</td>
-                        <td>{'leonardo@meirelles.com'}</td>
-                        <td>
-                            <button
-                                value={'legal'}
-                                onClick={(event: any) => handleClickUserType(event)}>
-                                {1} <br /><FaUserCog className='text-warning' />
-                            </button>
-                        </td>
-                        <td>
-                            <button onClick={() => handleClickUserStatus()}>
-                                {'true'} <br /><FaUserCog className='text-warning' />
-                            </button>
-                        </td>
-                        <td>{'0000/00/00'}</td>
-                    </tr>
+                    {userData?.map((user: any) => (
+                        <tr>
+                            <td>{user.id}</td>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <td>
+                                <button
+                                    value={'legal'}
+                                    onClick={(event: any) => handleClickUserType(event)}>
+                                    {1} <br /><FaUserCog className='text-warning' />
+                                </button>
+                            </td>
+                            <td>
+                                <button onClick={() => handleClickUserStatus()}>
+                                    {'true'} <br /><FaUserCog className='text-warning' />
+                                </button>
+                            </td>
+                            <td>{user.created_at}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </STable>
         </Container>

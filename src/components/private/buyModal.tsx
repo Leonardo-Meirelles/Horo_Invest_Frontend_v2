@@ -8,12 +8,7 @@ import { GoDiffRemoved } from "react-icons/go"
 import { ChangeEvent, useState } from "react"
 import toast from "react-hot-toast"
 import closeImg from '../../assets/images/close.svg'
-
-// enum target {
-//     orderQuantity = 'orderQuantity',
-//     orderPrice = 'orderPrice',
-//     orderTotal = 'orderTotal'
-// }
+import { postNewOrderService } from "../../services/userService"
 
 interface OrderState {
     orderQuantity: number | ''
@@ -23,13 +18,45 @@ interface OrderState {
 
 export function BuyModal() {
 
+    const dispatch = useDispatch()
+
+    const modalState = useSelector((state: RootState) => state.modal.open)
+
+    const modalAssets = useSelector((state: RootState) => state.modalAssets.asset)
+
     const [order, setOrder] = useState<OrderState[]>([
         {
             orderQuantity: '',
             orderPrice: '',
             orderTotal: ''
         }
-    ])
+    ]);
+
+    
+
+    const handlePlaceOrder = async () => {
+
+        const type = modalAssets.assetType
+
+        const id = modalAssets.assetId
+
+        const data = {
+            assetName: type,
+            assetId: id.toString(),
+            orderData: order
+        }
+        
+        try {
+            const result = await postNewOrderService(data)
+
+            toast.success('Order created successfully')
+
+            handleClose()
+        } catch {
+
+            toast.error('Something went wrong with your order')
+        }
+    }
 
     const handleChange = (index: number, event: ChangeEvent<HTMLInputElement>) => {
         //! Retirar type any
@@ -77,7 +104,6 @@ export function BuyModal() {
         setOrder(orderRemoved)
     }
 
-    const dispatch = useDispatch()
     const handleClose = () => {
         setOrder([{
             orderQuantity: '',
@@ -86,10 +112,6 @@ export function BuyModal() {
         }])
         dispatch(toggleModal())
     }
-
-    const modalState = useSelector((state: RootState) => state.modal.open)
-
-    const modalAssets = useSelector((state: RootState) => state.modalAssets.asset)
 
     return (
         <Modal
@@ -184,6 +206,7 @@ export function BuyModal() {
                                 variant="outlined"
                                 color='success'
                                 size="large"
+                                onClick={() => handlePlaceOrder()}
                                 
                             >
                                 Send Order
@@ -214,7 +237,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    maxWidth: 800,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -226,7 +249,7 @@ const Container = styled.div`
     flex-direction: column;
     text-align: center;
     padding: 2rem;
-    height: 50rem;
+    max-height: 50rem;
     width: 100%;
 `
 

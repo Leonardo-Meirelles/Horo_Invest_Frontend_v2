@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import styled from 'styled-components'
-import { RootState } from '../../../store'
-import { toggleModal } from '../../../store/openModal/action'
-import closeImg from '../../../assets/images/close.svg'
-import { deleteUserOrderByIdService } from '../../../services/userService'
-import toast from 'react-hot-toast'
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import styled from 'styled-components';
+import { RootState } from '../../../store';
+import { toggleModal } from '../../../store/openModal/action';
+import closeImg from '../../../assets/images/close.svg';
+import { deleteUserOrderByIdService } from '../../../services/userService';
+import toast from 'react-hot-toast';
 
 export function DeleteOrderModal(props: any) {
 
@@ -16,21 +16,19 @@ export function DeleteOrderModal(props: any) {
     const orderIdToDelete = useSelector((state: RootState) => state.deleteOrder.id)
     const orderAssetToDelete = useSelector((state: RootState) => state.deleteOrder.asset)
 
-    const handleDeleteOrder = () => {
+    const handleDeleteOrder = async () => {
         const data = {
             assetName: orderAssetToDelete,
             assetId: orderIdToDelete
         }
         try {
-            deleteUserOrderByIdService(data)
+            await deleteUserOrderByIdService(data)
                 .then(() => toast.success('Order deleted successfully!'))
-
-            toast.success('Order deleted successfully!', {
-                position: 'top-right'
-            })
+                handleClose()
 
         } catch {
             toast.success('Something went wrong with your request')
+            handleClose()
         }
 
     }

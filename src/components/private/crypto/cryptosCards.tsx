@@ -22,19 +22,26 @@ export function CryptoCard({ cryptoInfo }: CryptoCardProps) {
     const isCheaper = cryptoPrice < cryptoPriceBefore ? 'true' : 'false'
 
     const dispatch = useDispatch()
-    
+
     const handleOpen = () => {
-        dispatch(setModalAssets(id, cryptoName, cryptoPrice, 'Cryptocurrency', 'USD'))
+        dispatch(setModalAssets(id, cryptoName, cryptoPrice, 'cryptos', 'USD'))
         dispatch(toggleModal())
     }
 
     return (
         <SPaper elevation={24} ischeaper={isCheaper}>
             <Content>
-                <h2>{cryptoName}</h2>
-                <hr />
-                <h2>USD {cryptoPrice}</h2>
-                <hr />
+                <h1>{cryptoName}</h1>
+                <h2>
+                    Today: USD 
+                    <br />
+                    <b>{cryptoPrice}</b>
+                </h2>
+                <h2>
+                    Yesterday: USD 
+                    <br />
+                    <b>{cryptoPriceBefore}</b>
+                </h2>
                 <button type='button' onClick={handleOpen}><AiOutlinePlusSquare /> <br /> Buy now </button>
             </Content>
         </SPaper>
@@ -45,9 +52,10 @@ interface SPaperProps {
     ischeaper: 'true' | 'false'
 }
 
-const SPaper = styled(Paper)<SPaperProps>`
+const SPaper = styled(Paper) <SPaperProps>`
     width: 15rem;
     height: 15rem;
+    margin: 1rem;
     text-align: center;
     border: 2px solid;
     border-color: ${(props) => props.ischeaper === 'true' ? 'red' : 'green'};
@@ -61,13 +69,13 @@ const SPaper = styled(Paper)<SPaperProps>`
 const Content = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 100%;
     height: 100%;
     padding: 1rem;
 
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.20rem;
     }
         
     button {

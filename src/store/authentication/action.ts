@@ -92,7 +92,3 @@ export const logoutAuthentication = (): AppThunk => {
         }
     }
 }
-
-function getState(): { modal: any; } {
-    throw new Error("Function not implemented.");
-}

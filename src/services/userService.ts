@@ -1,31 +1,36 @@
 import { http } from '../config/http'
 
-interface UserData {
+interface AssetData {
     assetName: string
-    assetId: string
+    assetId?: number | string
 }
-//! alterar nome e dados da rota, pois está igual a de DELETE, e deve ser somente de GET
-export const getUserOrdersService = async (data: UserData) => (
 
-    await http.get(`/user/orders/${data.assetName}/:${data.assetId}/delete`)
+export const getUserCryptosOrdersService = async ({assetName}: AssetData) => (
+
+    await http.get(`/${assetName}/orders`)
+);
+
+export const getUserStocksOrdersService = async ({assetName}: AssetData) => (
+
+    await http.get(`/${assetName}/orders`)
+);
+
+export const deleteUserOrderByIdService = async (data: AssetData) => (
+
+    await http.delete(`/user/orders/${data.assetName}/${data.assetId}/delete`)
+);
+
+export const postNewOrderService = async (data: any) => (
+    
+    await http.post(`/${data.assetName}/${data.assetId}/order`, data.orderData)
 )
-
-export const deleteUserOrderByIdService = async (data: UserData) => (
-
-    await http.delete(`/user/orders/${data.assetName}/:${data.assetId}/delete`)
-)
-
-// export const postNewOrderService = async () => (
-
-//     await http.post(`/${data.assetName}/:${data.assetId}/order`)
-// ) 
 
 export const changeUserEmailService = async (data: string) => (
 
-    await http.patch(`/user/profile/email/:${data}`)
-)
+    await http.patch(`/user/profile/email/${data}`)
+);
 
 export const changeUserPasswordService = async (data: string) => (
 
-    await http.patch(`/user/profile/password/:${data}`)
-)
+    await http.patch(`/user/profile/password/${data}`)
+);
