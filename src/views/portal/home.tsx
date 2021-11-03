@@ -63,7 +63,7 @@ const Section = styled.section`
 
 const Img = styled.img`
     height: 50rem;
-    width: 50rem;
+    width: 50%;
 `;
 
 const TextDiv = styled.div`

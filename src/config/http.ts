@@ -3,7 +3,7 @@ import { getTokenLocalStorage } from './storage';
 import store from '../store/index';
 import { logoutAuthentication } from '../store/authentication/action';
 
-const urlDefault = 'http://localhost:3333';
+const urlDefault = 'https://api-horo-invest-v2.herokuapp.com';
 
 export const http = axios.create({
     baseURL: urlDefault
