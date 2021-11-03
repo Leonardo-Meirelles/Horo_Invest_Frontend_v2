@@ -10,6 +10,10 @@ The admin can manage cryptos and stocks, include or delete them and search all t
 
 This project is of our own, and we made it during the Infnet Fullstack (MERN) Bootcamp :)
 
+## Link to website
+
+https://horo-invest-v2.netlify.app
+
 ## Authors
 - Leonardo Meirelles
 
@@ -57,13 +61,9 @@ This project is of our own, and we made it during the Infnet Fullstack (MERN) Bo
 
 ![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
 
-![]()
-
-<img alt='' src="" width='100' height='45' />
-
 <img alt='JWT' src="http://jwt.io/img/logo-asset.svg" width='100' height='45' />
 
-Mirage.js, (I didn't found a badge, sorry)
+Mirage.js (I didn't found a badge, sorry)
 
 
 ## License
