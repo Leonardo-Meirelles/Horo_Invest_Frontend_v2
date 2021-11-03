@@ -10,12 +10,10 @@ import { useEffect, useState } from "react"
 export function UsersTableList(props: RouteComponentProps) {
 
     const [userData, setUserData] = useState<any>([])
-    console.log('🚀 ~ userData', userData)
 
     const dispatch = useDispatch()
 
     const handleClickUserType = (event: any) => {
-        // const x = event.target.value
 
         dispatch(toggleModal())
     }
@@ -35,11 +33,6 @@ export function UsersTableList(props: RouteComponentProps) {
         getUsers()
 
     }, [])
-
-
-
-
-
 
     return (
         <Container>

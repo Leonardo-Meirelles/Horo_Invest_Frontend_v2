@@ -19,15 +19,6 @@ export function NavBar() {
           <SNavLink tag={Link} to='/'>Home</SNavLink >
         </NavItem>
         <NavItem>
-          <SNavLink tag={Link} to="/stocks">Trading Stocks</SNavLink >
-        </NavItem>
-        <NavItem>
-          <SNavLink tag={Link} to="/currency">Currency Exchange</SNavLink >
-        </NavItem>
-        <NavItem>
-          <SNavLink tag={Link} to="/cripto">Cripto Currency</SNavLink >
-        </NavItem>
-        <NavItem>
           <SNavLink tag={Link} to="/about">About</SNavLink >
         </NavItem>
       </Nav>

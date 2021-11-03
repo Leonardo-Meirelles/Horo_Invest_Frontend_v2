@@ -15,11 +15,8 @@ export const loginAuthentication = (data: LoginForm): AppThunk => {
         dispatch({ type: 'AUTH_LOADING', data: true })
 
         try {
-            console.log(data);
             
-            const responseToken = await authenticationLoginService(data)
-            console.log('chegou aqui ####################');
-            
+            const responseToken = await authenticationLoginService(data)            
 
             saveTokenLocalStorage(responseToken.data.token)
 

@@ -4,7 +4,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { toggleModal } from "../../../store/openModal/action";
 import { Skeleton, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getUserCryptosOrdersService } from "../../../services/userService";
 import { getUserStocksOrdersService } from "../../../services/userService";
 import { deleteOrder } from "../../../store/deleteOrderModal/action";
@@ -22,9 +22,6 @@ export function OrdersList() {
     const [alignment, setAlignment] = useState('stocks');
     const [orderData, setOrderData] = useState<Order[]>();
     const [loading, setLoading] = useState(true);
-
-    const [, updateState] = useState<any>();
-    const forceUpdate = useCallback(() => updateState({}), []);
 
     const handleChangeChoiceButtons = (
         event: React.MouseEvent<HTMLElement>,
@@ -79,7 +76,6 @@ export function OrdersList() {
         };
         getUserOrdersByAsset()
     }, [alignment]);
-
 
     return (
         <Container>
