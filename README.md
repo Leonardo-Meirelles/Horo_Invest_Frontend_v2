@@ -8,6 +8,8 @@ The user can create a profile, using email and password, and place orders for cr
 
 The admin can manage cryptos and stocks, include or delete them and search all the user in the database.
 
+Mobile responsiveness is still being implemented.
+
 This project is of our own, and we made it during the Infnet Fullstack (MERN) Bootcamp :)
 
 ## Link to website
